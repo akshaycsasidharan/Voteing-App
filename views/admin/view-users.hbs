@@ -1,0 +1,30 @@
+<section>
+    <div class="container">
+        <table class="table">
+          {{!-- <a href="/admin/"></a> --}}
+  <thead>
+    <tr>
+            <th scope="col">Numbers</th>
+
+      <th scope="col">firstname</th>
+      <th scope="col">lastname</th>
+      <th scope="col">address</th>
+      <th scope="col">age</th>
+    </tr>
+  </thead>
+  <tbody>
+
+      {{#each users}}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{this.firstname}}</td>
+      <td>{{this.lastname}}</td>
+      <td>{{this.address}}</td>
+      <td>{{this.age}}</td>
+    </tr>
+    {{/each}}
+
+  </tbody>
+</table>
+    </div>
+</section> 
