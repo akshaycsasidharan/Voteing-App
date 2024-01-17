@@ -5,7 +5,7 @@ var collection = require("../config/collection");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { admin:false });
+   res.render('index', { admin:false });
 });
 
 // router.post('/submit',(req,res)=>{
@@ -14,11 +14,7 @@ router.get('/', function(req, res, next) {
 //   // res.send('got it')
 // })
 
-router.get('/#', function (req, res) {
-   res.render("user/candidate");
-
-  // console.log("hello dear");
-});
+// ------------------------------------mongodb connection------------------------------------
 
 router.post("/submit", async function (req, res) {
   
