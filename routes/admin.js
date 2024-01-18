@@ -2,12 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 
-// router.get('/', function(req, res, next) {
-//   res.render('index' { admin:true });
-//  // res.send('respond with a resource');
-// });
-
-
+router.get('/', function(req, res, next) {
+  res.render('index', { admin:true });
+ // res.send('respond with a resource');
+});
 
 
 router.get('/admin', (req, res)=> {
