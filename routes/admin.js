@@ -3,22 +3,23 @@ var router = express.Router();
 
 
 router.get('/', function(req, res, next) {
-  res.render('index', { admin:true });
+  res.render('admin/adminLogin', { admin:true });
  // res.send('respond with a resource');
 });
 
+router.get('/candidatesAdmin',(req,res)=>{
+  res.render('admin/candidatesAdmin')
+ })
 
-router.get('/admin', (req, res)=> {
-  res.render('admin/view-users');
+router.get('/viewUsers', (req, res)=> {
+  res.render('admin/viewUsers');
 });
 
-router.get('/verified-users', (req, res)=> {
-  res.render('admin/verified-users');
+router.get('/verifiedUsers', (req, res)=> {
+  res.render('admin/verifiedUsers');
 });
 
-router.get('/candidatesadmin', (req, res)=> {
-  res.render('admin/candidatesadmin');
-});
+
 
 router.get('/result', (req, res)=> {
   res.render('admin/result');

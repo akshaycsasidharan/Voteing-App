@@ -6,7 +6,7 @@ var logger = require('morgan');
 var hbs = require('express-handlebars');
 let Hbs = require('handlebars');
 
-var indexRouter = require('./routes/index');
+// var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
 
