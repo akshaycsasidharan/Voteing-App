@@ -1,37 +1,81 @@
-
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <form action="/" method="post" role="form" enctype="application/x-www-form-urlencoded">
-                <legend>Enter Registration Information Here</legend>
-
-                <div class="form-group">
-                    <label for="first_name">First Name</label>
-                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name">
-                </div>
-
-                <div class="form-group">
-                    <label for="last_name">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" id="first_name" placeholder="Last Name">
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="text" class="form-control" name="email" id="email" placeholder="Email Address">
-                </div>
-
-                <div class="form-group">
-                    <label for="pw">Password</label>
-                    <input type="password" class="form-control" name="pw" id="pw">
-                </div>
-
-                <div class="form-group">
-                    <label for="pw_confirm">Confirm Password</label>
-                    <input type="password" class="form-control" name="pw_confirm" id="pw_confirm">
-                </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+{{!-- <div class="wrapper">
+  
+        <form class="p-3 mt-3">
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="userName" id="userName" placeholder="Username">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="password" id="pwd" placeholder="Password">
+            </div>
+            <button class="btn mt-3">Login</button>
+        </form>
+        <div class="text-center fs-6">
+            <a href="#">Forget password?</a> or <a href="#">Sign up</a>
         </div>
-    </div>
-</div>
+    </div> --}}
+
+
+
+    {{!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: grid;
+    place-items: center;
+}
+
+h1{
+    /* color: rgb(223, 155, 52); */
+    margin-top: 20vh;
+    margin-bottom: 30px;
+
+}
+input{
+    font-size: 1rem;
+    width: 300px;
+    padding: 6px 2px; 
+    margin: 10px 0 10px 0;
+}
+.sub{
+    background-color:rgb(223, 155, 52);
+    cursor: pointer;
+}
+
+form{
+    /* margin-top: 20vh; */
+    text-align: center;
+    border: 5px solid rgb(111, 70, 23);
+    padding: 20px;
+    background-color: rgb(239, 192, 135);
+}
+    </style>
+</head>
+<body>
+
+    <h1>Login Form</h1>
+
+    <form action="/" method="post" >
+        <input placeholder="Name" name="name" type="text">
+        <br>
+        <input placeholder="Password" name="password" type="password">
+        <br>
+        <input class="sub" type="submit">
+     <h3>Dont have a account ?</h3>
+    <a href="/signup">Create a new account</a>
+    </form>
+
+
+    
+</body>
+</html> --}}

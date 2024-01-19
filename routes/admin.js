@@ -1,31 +1,25 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+var { connectToMongoDB } = require("../config/connection");
+var collection = require("../config/collection");
+
+const {
+  adminHomepage,
+  candidatePage,
+  viewsUserspage,
+  verifiedUserspage,
+  resultPage,
+} = require("../controllers/adminController");
 
 
-router.get('/', function(req, res, next) {
-  res.render('admin/adminLogin', { admin:true });
- // res.send('respond with a resource');
-});
+router.get("/homes", adminHomepage);
 
-router.get('/candidatesAdmin',(req,res)=>{
-  res.render('admin/candidatesAdmin')
- })
+router.get("/candidates", candidatePage);
 
-router.get('/viewUsers', (req, res)=> {
-  res.render('admin/viewUsers');
-});
+router.get("/viewUsers", viewsUserspage);
 
-router.get('/verifiedUsers', (req, res)=> {
-  res.render('admin/verifiedUsers');
-});
+router.get("/verifiedUsers", verifiedUserspage);
 
-
-
-router.get('/result', (req, res)=> {
-  res.render('admin/result');
-});
-
+router.get("/result", resultPage);
 
 module.exports = router;
-
-
