@@ -1,15 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+<section>
+  <div class="container">
+    <div class="row mt-4">
+        <a href="/admin/verifiedUsers" class="btn btn-success ml-auto">verify users</a>
+    </div>
+    <table class="table mt-5">
+      <thead>
+        <tr>
+          <th scope="col">no</th>
 
-    <h1>hello akshay</h1>
+          <th scope="col">name</th>
+          <th scope="col">age</th>
+          <th scope="col">place</th>
+          <th scope="col">qualification</th>
+        </tr>
+      </thead>
+      <tbody>
 
+        {{#each users}}
 
-</body>
-</html>
+          <tr>
+            <th scope="row">1</th>
+            <td>{{this.name}}</td>
+            <td>{{this.age}}</td>
+            <td>{{this.place}}</td>
+            <td>{{this.qualification}}</td>
+          </tr>
+
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+</section>
