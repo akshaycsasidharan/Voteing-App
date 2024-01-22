@@ -5,22 +5,42 @@ var collection = require("../config/collection");
 var adminHelper = require('../helpers/adminHelper');
 
 
-router.get('/',function(req,res,next) {
-  adminHelper.getallUsers().then((product) =>{
-    res.render('admin/viewUsers',{admin:true,product})
-  });
-});
 
-router.get('/verifiedUsers',function(req,res){
-  res.render('admin/verifiedUsers')
-});
 
-router.post('/verifiedUsers',(req,res) => {
-  adminHelper.addUsers(req.body).then(() => {
-    console.log(req.body);
-    res.render('admin/viewUsers')
-  });
-});
+// router.get('/verifiedUsers',function(req,res){
+//   res.render('admin/verifiedUsers')
+// });
+
+// router.post('/verifiedUsers',(req,res) => {
+//   adminHelper.addUsers(req.body).then(() => {
+//     console.log(req.body);
+//     res.render('admin/viewUsers')
+//   });
+// });
+
+const {
+  adminLoginpage,
+  login,
+  candidatePage,
+  viewsUserspage,
+  resultPage,
+} = require("../controllers/adminController");
+
+router.get("/adminlogin",adminLoginpage)
+
+router.post('/adminlogin',login)
+
+
+router.get("/candidates", candidatePage);
+
+router.get("/viewUsers", viewsUserspage);
+
+
+router.get("/result", resultPage);
+
+
+
+
 
 
 module.exports = router;
@@ -30,24 +50,5 @@ module.exports = router;
 
 
 
-
-// const {
-//   adminHomepage,
-//   candidatePage,
-//   viewsUserspage,
-//   verifiedUserspage,
-//   resultPage,
-// } = require("../controllers/adminController");
-
-
-// router.get("/homes", adminHomepage);
-
-// router.get("/candidates", candidatePage);
-
-// router.get("/viewUsers", viewsUserspage);
-
-// router.get("/verifiedUsers", verifiedUserspage);
-
-// router.get("/result", resultPage);
 
 

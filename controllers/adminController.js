@@ -8,10 +8,31 @@ const adminHelper = require("../helpers/adminHelper")
 
 module.exports = {
 
-
-    adminHomepage:(req,res,next)=>{
-        res.render('admin/adminHome')
+    adminLoginpage:(req,res,next)=>{
+        res.render('admin/adminLogin')
     },
+
+    login:(req,res)=>{
+        console.log("function called");
+        console.log(req.body);
+           try {
+               adminHelper.logindo(req.body).then((response)=>{
+                   console.log(response);
+                    res.redirect('/candidates')
+               })
+           } catch (error) {
+               console.log(error);
+           }
+       },
+       
+
+
+
+
+
+
+
+
 
     candidatePage:((req,res,next)=>{
         res.render('admin/candidatesAdmin')
@@ -28,5 +49,6 @@ module.exports = {
     resultPage:(req,res)=>{
         res.render('admin/result')
     }
+
 }
 

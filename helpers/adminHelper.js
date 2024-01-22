@@ -3,26 +3,38 @@ var collection = require("../config/collection");
 
 module.exports = {
 
-    addUsers:(users)=>{
-            return new Promise(async (resolve, reject) => {
-              const database = await connectToMongoDB();
-        
-              await database
-                .collection(collection.ADMIN_COLLECTION)
-                .insertOne(users)
-                .then((data) => {
-                  resolve(data)
-                });
-            });
-          },
+  logindo: (userData) => {
+    return new Promise(async (resolve, reject) => {
+      console.log(userData);
+     
+      // if(userData.password === userData.confirmpassword){
 
-          getallUsers:()=>{
-            return new Promise(async(resolve,reject) => {
-              const database = await connectToMongoDB();
+      //   console.log(" @##$@#$%&*^^%$##$%^^&&&%E#@successed");
+      //     var encryptedpassword = await bcrypt.hash(userData.password,10)
+      //    console.log(encryptedpassword);
+      // }else{
+      //   console.log("error");
+      //   throw new Error("given passwords are not same")
+      // }
 
-              let product = await database.collection(collection.ADMIN_COLLECTION).find().toArray()
-              resolve(product)
-            })
-          } 
-    }
+      let signupData = {
+        email:userData.email,
+        password:userData.password,
+      }
+
+      console.log(signupData);
+
+      const db = await connectToMongoDB();
+
+      await db
+        .collection(collection.ADMIN_COLLECTION)
+        .insertOne(signupData)
+        .then((data) => {
+            console.log(data);
+            resolve(data.insertedId)
+        });
+    });
+  }
+
+}
     

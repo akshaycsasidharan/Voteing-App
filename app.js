@@ -5,8 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('express-handlebars');
 let Hbs = require('handlebars');
+var session = require('express-session')
+var fileupload=require('express-fileupload')
 
-// var indexRouter = require('./routes/index');
+
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
 
@@ -33,14 +35,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
+app.use(session({secret:"key",cookie:{maxAge:60000}}))
+app.use(fileupload())
 
 app.use('/', usersRouter);
 
-//  app.use('/', adminRouter);
+  // app.use('/admin', adminRouter);
 
- app.use('/admin',adminRouter);
+  app.use('/',adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
