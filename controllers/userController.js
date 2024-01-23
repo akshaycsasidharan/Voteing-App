@@ -37,9 +37,10 @@ module.exports = {
            try {
                userHelper.doLogin(req.body).then((response)=>{
                     if(response.status){
+                        console.log(response.status);
                         req.session.loggedIn = true
                         req.session.user=response.user
-                        return res.redirect('/')
+                        res.redirect('/')
                     }else{
                         res.redirect('/candidate')
                     }             
@@ -49,11 +50,11 @@ module.exports = {
            }
        },
 
-       candidatePage:(req,res,next)=>{
-        res.render('user/candidate')
+    //    candidatePage:(req,res,next)=>{
+    //     res.render('user/candidate')
     }
 
-}
+// }
 
 
 

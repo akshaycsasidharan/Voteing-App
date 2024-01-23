@@ -19,8 +19,6 @@ module.exports = {
         throw new Error("given passwords are not same")
       }
 
-      
-
       let signupData = {
         fullName:userData.fullname,
         email:userData.email,
@@ -32,8 +30,8 @@ module.exports = {
         voteCount:0
       }
 
-    // console.log("user type:",signupData.usertype);
-    // console.log("image:",signupData.image);
+      console.log(signupData);
+
 
       const db = await connectToMongoDB();
 

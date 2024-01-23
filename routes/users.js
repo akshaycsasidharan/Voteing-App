@@ -24,7 +24,7 @@ const {
   signup,
   loginPage,
   login,
-     candidatePage
+    //  candidatePage
   // homePage,
 } = require("../controllers/userController");
 
@@ -41,7 +41,7 @@ router.post("/login", login);
 //   userHelper.doLogin(req.body)
 // })
 
- router.get("/candidate", candidatePage);
+//  router.get("/candidate", candidatePage);
 
 // router.get("/home", homePage);
 
