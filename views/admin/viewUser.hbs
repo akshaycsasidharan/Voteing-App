@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+
+
+
+    .heading{
+        text-align: center;
+        margin-top: 25px;
+      }
+
+      .button{
+    border-radius: 10px;
+    background-color: #e7e7e7; 
+    color: black;
+  }
+  </style>
+</head>
+<body>
+  
+  {{!-- <a href="/admin/viewUser"></a> --}}
+
+ <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/admin/viewUser">Admin Panel</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin/viewUser">Users</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin/addCandidates">Candidates</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin/result">Result</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Signout</a>
+                    </li>
+            </div>
+                          </div>
+    </nav>
+</header>
+
+<section>
+
+    <h3 class="heading">USERS</h3>
+      <div class="container mt-5">
+
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col"> User Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">action</th>
+              <th scope="col">Image</th>
+
+
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <th scope="row">1</th>
+              <td>akshay</td>
+              <td>akshay0480@gmail.com</td>
+              <td>
+              <button class="button">block</button>
+              <button class="button">unblock</button>
+              </td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <th scope="row">2</th>
+              <td>anas</td>
+              <td>anas@gmail.com</td>
+              <td>
+              <button class="button">block</button>
+              <button class="button">unblock</button>
+              </td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <th scope="row">3</th>
+              <td>vahab</td>
+              <td>vahab@gmail.com</td>
+              <td>
+                <button class="button">block</button>
+              <button class="button">unblock</button>
+              </td>              
+              <td></td>
+            </tr>
+
+            <tr>
+              <th scope="row">4</th>
+              <td>asish</td>
+              <td>asish@gmail.com</td>
+              <td>
+                <button class="button">block</button>
+              <button class="button">unblock</button>
+              </td>              
+              <td></td>
+            </tr>
+
+            <tr>
+              <th scope="row">3</th>
+              <td>yadhu</td>
+              <td>yadhu@gmail.com</td>
+              <td>
+              <button class="button">block</button>
+              <button class="button">unblock</button>
+              </td>    
+              <td></td>
+            </tr>
+
+          </tbody>
+        </table>
+</body>
+</html>

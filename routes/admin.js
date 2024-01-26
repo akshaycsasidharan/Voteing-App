@@ -2,10 +2,7 @@ var express = require("express");
 var router = express.Router();
 var { connectToMongoDB } = require("../config/connection");
 var collection = require("../config/collection");
-var adminHelper = require('../helpers/adminHelper');
-
-
-
+var adminHelper = require("../helpers/adminHelper");
 
 // router.get('/verifiedUsers',function(req,res){
 //   res.render('admin/verifiedUsers')
@@ -20,35 +17,17 @@ var adminHelper = require('../helpers/adminHelper');
 
 const {
   adminLoginpage,
-  login,
-  candidatePage,
-  viewsUserspage,
   resultPage,
+  viewUserspage,
+  addcandidatePage,
 } = require("../controllers/adminController");
 
-router.get("/adminlogin",adminLoginpage)
+router.get("/", adminLoginpage);
 
-router.post('/adminlogin',login)
+router.get("/viewUser", viewUserspage);
 
-
-router.get("/candidates", candidatePage);
-
-router.get("/viewUsers", viewsUserspage);
-
+router.get("/addCandidates", addcandidatePage);
 
 router.get("/result", resultPage);
 
-
-
-
-
-
 module.exports = router;
-
-
-
-
-
-
-
-
