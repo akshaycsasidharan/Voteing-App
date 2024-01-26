@@ -19,7 +19,7 @@ const {
   signup,
   loginPage,
   login,
-  // candidatePage
+   candidatePage
 } = require("../controllers/userController");
 
 router.get("/signup", signupPage);
@@ -30,7 +30,7 @@ router.get("/", loginPage);
 
 router.post("/login", login);
 
-//  router.get("/candidate", candidatePage);
+router.get("/candidate", candidatePage);
 
 // router.get('/logout',(req,res)=>{
 //   req.session.destroy()

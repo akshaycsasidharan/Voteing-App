@@ -39,9 +39,9 @@ module.exports = {
           console.log(response.status);
           req.session.loggedIn = true;
           req.session.user = response.user;
-          res.redirect("/");
-        } else {
           res.redirect("/candidate");
+        } else {
+          res.redirect("/");
         }
       });
     } catch (error) {
@@ -49,8 +49,11 @@ module.exports = {
     }
   },
 
-  //    candidatePage:(req,res,next)=>{
-  //     res.render('user/candidate')
-};
+  // -------------------------------------------------------------------------------------------------------------
 
-// }
+  candidatePage: (req, res, next) => {
+    res.render("user/candidate");
+  },
+
+
+};
