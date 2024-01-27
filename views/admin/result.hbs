@@ -5,9 +5,12 @@
     <title>Document</title>
 
     <style>
-      .heading{ text-align: center; margin-top: 45px; }
+      .heading{ text-align: center; margin-top: 45px; } *{ background-color:
+      LightGray; }
     </style>
+
   </head>
+
   <body>
 
     <section>
@@ -16,7 +19,7 @@
 
       <div class="container mt-5">
 
-        <table class="table  table-hover">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -26,24 +29,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>virat</td>
-              <td>criclet player</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>messi</td>
-              <td>football player</td>
-              <td>6</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>sania mirsa</td>
-              <td>badmenton player</td>
-              <td>2</td>
-            </tr>
+
+            {{#each canddata}}
+
+              <tr>
+                <th scope="row">1</th>
+                <td>{{this.name}}</td>
+                <td>{{this.designation}}</td>
+                <td></td>
+              </tr>
+
+            {{/each}}
+
           </tbody>
         </table>
 

@@ -18,26 +18,28 @@ module.exports = {
     });
   },
 
-
-
-
-  unblocked:(req,res,next) =>{
-    console.log(req.body);
-
-    try {
-      
-       adminHelper.dounblock(req.body.userId)
-      
-    } 
-    catch (error) {
-      
-      console.log(error);
-
-    }
-
+  resultPage: (req, res) => {
+    res.render("admin/result");
   },
 
-  // -------------------------------------------------------------------------------------
+  resultPage: (req, res, next) => {
+    adminHelper.getcandidatedata().then(async (canddata) => {
+      console.log("!!!!!@@#$%%%%%^^&&***((()))))(((^&^", canddata);
+      res.render("admin/result", {
+        canddata,
+      });
+    });
+  },
+
+  // unblocked: async (req, res, next) => {
+  //   console.log(req.body);
+
+  //   try {
+  //     adminHelper.dounblock(req.body.userId);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // },
 
   addcandidatePage: (req, res, next) => {
     res.render("admin/addCandidates");
@@ -49,14 +51,10 @@ module.exports = {
     try {
       adminHelper.doCandidate(req.body).then((response) => {
         console.log(response);
-        res.redirect("/result");
+        res.redirect("/admin/result");
       });
     } catch (error) {
       console.log(error);
     }
-  },
-
-  resultPage: (req, res) => {
-    res.render("admin/result");
   },
 };

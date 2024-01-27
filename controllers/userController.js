@@ -25,10 +25,6 @@ module.exports = {
 
   loginPage: (req, res, next) => {
     res.render("user/userLogin");
-
-    // if (req.session.loggedIn) {
-    //   res.redirect("/");
-    // } else res.render("user/userLogin");
   },
 
   login: (req, res, next) => {

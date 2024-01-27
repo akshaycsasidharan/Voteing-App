@@ -540,14 +540,15 @@ a.btn-goback:hover {
       </ul>
     </div>
     <div ng-app ng-init="checked = false">
-				        <form class="form-signin" action="/candidateadd" method="post" name="form">
-          <label for="username"> name</label>
-          <input class="form-styling" type="text" name="username" placeholder=""/>
-          <label for="password">Designation</label>
-          <input class="form-styling" type="text" name="password" placeholder=""/>
+				        <form class="form-signin" action="/admin/candidateadd" method="post" name="form">
+          <label for="name"> name</label>
+          <input class="form-styling" type="text" name="name" placeholder=""/>
+          <label for="designation">Designation</label>
+          <input class="form-styling" type="text" name="designation" placeholder=""/>
            <label for="image">Sign</label>
           <input type="file" name="image"  class="form-control"> 
           <button type="submit" class="btn-signup">Submit</button> 
+        </form>
           
 </body>
 </html>

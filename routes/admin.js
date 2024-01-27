@@ -12,14 +12,15 @@ const {
   viewUserspage,
   addcandidatePage,
   Candidatesadd,
-   unblocked
+  //  unblocked
 
 } = require("../controllers/adminController");
 
 
 router.get("/viewUser", viewUserspage);
 
-router.post("/unblocked",unblocked)
+
+// router.post("/unblocked",unblocked)
 
 router.get("/addCandidates", addcandidatePage);
 

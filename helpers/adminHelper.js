@@ -1,5 +1,5 @@
 var { connectToMongoDB } = require("../config/connection");
-var collection = require("../config/collection");
+const collection = require("../config/collection");
 
 module.exports = {
   getUsersData: () => {
@@ -16,6 +16,19 @@ module.exports = {
     });
   },
 
+
+  getcandidatedata : () =>{
+    console.log("candidate result");
+
+    return new Promise (async (resolve,reject) => {
+      const db = await connectToMongoDB();
+      let getcandidate = await db.collection(collection.CANDIDATE_COLLECTION).find({}).toArray();
+      console.log("getcandidatedata",getcandidate);
+      resolve(getcandidate);
+    })
+  },
+
+  
   doCandidate: (datacandidate) => {
     return new Promise(async (resolve, reject) => {
       console.log("candidatedata", datacandidate);
@@ -39,25 +52,23 @@ module.exports = {
     });
   },
 
+  // dounblock: (userId) => {
+  //   console.log("id called");
 
-  dounblock:(userId) =>{
-    console.log("id called");
+  //   return new Promise(async (resolve, reject) => {
+  //     const db = await connectToMongoDB();
+  //     let getid = await db
+  //       .collection(collection.USER_COLLECTION)
+  //       .find(userId)
+  //       .then((response) => {
+  //         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!", response);
 
-    return new Promise(async (resolve, reject) => {
-      const db = await connectToMongoDB();
-      let getid= await db.collection(collection.USER_COLLECTION).find(userId).then((response)=>{
-
-
-
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!",response);
-        
-        if(blocked  == true){
-          res.redirect('/candidate')
-        }else{
-          res.redirect("/login")
-        }
-      })
-    });
-  },
-  
+  //         if (blocked == true) {
+  //           res.redirect("/candidate");
+  //         } else {
+  //           res.redirect("/login");
+  //         }
+  //       });
+  //   });
+  // },
 };
