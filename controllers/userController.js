@@ -24,9 +24,11 @@ module.exports = {
   //----------------------------------------------------------------------------------------------------------------------
 
   loginPage: (req, res, next) => {
-    if (req.session.loggedIn) {
-      res.redirect("/");
-    } else res.render("user/userLogin");
+    res.render("user/userLogin");
+
+    // if (req.session.loggedIn) {
+    //   res.redirect("/");
+    // } else res.render("user/userLogin");
   },
 
   login: (req, res, next) => {
@@ -54,6 +56,8 @@ module.exports = {
   candidatePage: (req, res, next) => {
     res.render("user/candidate");
   },
+
+  
 
 
 };

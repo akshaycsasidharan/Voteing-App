@@ -2,39 +2,62 @@ var { connectToMongoDB } = require("../config/connection");
 var collection = require("../config/collection");
 
 module.exports = {
+  getUsersData: () => {
+    console.log("function called");
 
-  logindo: (userData) => {
     return new Promise(async (resolve, reject) => {
-      console.log(userData);
-     
-      // if(userData.password === userData.confirmpassword){
+      const db = await connectToMongoDB();
+      let getdata = await db
+        .collection(collection.USER_COLLECTION)
+        .find({})
+        .toArray();
+      console.log("getdata", getdata);
+      resolve(getdata);
+    });
+  },
 
-      //   console.log(" @##$@#$%&*^^%$##$%^^&&&%E#@successed");
-      //     var encryptedpassword = await bcrypt.hash(userData.password,10)
-      //    console.log(encryptedpassword);
-      // }else{
-      //   console.log("error");
-      //   throw new Error("given passwords are not same")
-      // }
+  doCandidate: (datacandidate) => {
+    return new Promise(async (resolve, reject) => {
+      console.log("candidatedata", datacandidate);
 
-      let signupData = {
-        email:userData.email,
-        password:userData.password,
-      }
+      let formdata = {
+        name: datacandidate.name,
+        designation: datacandidate.designation,
+      };
 
-      console.log(signupData);
+      console.log("candidatedata@#$%^&*%$##", formdata);
 
       const db = await connectToMongoDB();
 
-      await db
-        .collection(collection.ADMIN_COLLECTION)
-        .insertOne(signupData)
+      const result = await db
+        .collection(collection.CANDIDATE_COLLECTION)
+        .insertOne(formdata)
         .then((data) => {
-            console.log(data);
-            resolve(data.insertedId)
+          console.log(data);
+          resolve(data.insertedId);
         });
     });
-  }
+  },
 
-}
-    
+
+  dounblock:(userId) =>{
+    console.log("id called");
+
+    return new Promise(async (resolve, reject) => {
+      const db = await connectToMongoDB();
+      let getid= await db.collection(collection.USER_COLLECTION).find(userId).then((response)=>{
+
+
+
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!",response);
+        
+        if(blocked  == true){
+          res.redirect('/candidate')
+        }else{
+          res.redirect("/login")
+        }
+      })
+    });
+  },
+  
+};

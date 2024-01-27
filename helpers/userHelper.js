@@ -19,14 +19,12 @@ module.exports = {
       }
 
       let signupData = {
-        fullName: userData.fullname,
+        name: userData.name,
         email: userData.email,
         password: encryptedpassword,
-        usertype: userData.usertype,
-        image: userData.image,
-        verified: false,
+        image: userData.imageURL,
+        blocked: false,
         vote: false,
-        voteCount: 0,
       };
 
       console.log(signupData);
@@ -45,7 +43,6 @@ module.exports = {
 
   doLogin: (loginData) => {
     return new Promise(async (resolve, reject) => {
-      
       console.log("logindata", loginData);
       console.log("hekjcdnckjsdnj", loginData.password, loginData.email);
       let loginstatus = false;
@@ -68,7 +65,7 @@ module.exports = {
             console.log("login failed");
             resolve({ status: false });
           }
-        })
+        });
       } else {
         console.log("email does not exist");
         resolve({ status: false });

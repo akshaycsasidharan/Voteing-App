@@ -4,29 +4,29 @@ var { connectToMongoDB } = require("../config/connection");
 var collection = require("../config/collection");
 var adminHelper = require("../helpers/adminHelper");
 
-// router.get('/verifiedUsers',function(req,res){
-//   res.render('admin/verifiedUsers')
-// });
 
-// router.post('/verifiedUsers',(req,res) => {
-//   adminHelper.addUsers(req.body).then(() => {
-//     console.log(req.body);
-//     res.render('admin/viewUsers')
-//   });
-// });
 
 const {
-  adminLoginpage,
+
   resultPage,
   viewUserspage,
   addcandidatePage,
+  Candidatesadd,
+   unblocked
+
 } = require("../controllers/adminController");
 
-router.get("/", adminLoginpage);
 
 router.get("/viewUser", viewUserspage);
 
+router.post("/unblocked",unblocked)
+
 router.get("/addCandidates", addcandidatePage);
+
+
+router.post("/candidateadd",Candidatesadd);
+
+// router.post("/unblocked",unblocked)
 
 router.get("/result", resultPage);
 

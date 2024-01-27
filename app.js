@@ -36,7 +36,6 @@ app.use(session({ secret: "key", cookie: { maxAge: 600000 } }));
 app.use(fileupload());
 
 app.use("/", usersRouter);
-// app.use("/", adminRouter);
 
 app.use("/admin", adminRouter);
 
