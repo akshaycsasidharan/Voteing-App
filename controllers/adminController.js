@@ -18,6 +18,10 @@ module.exports = {
     });
   },
 
+  loginpage: (req,res,next) => {
+    res.render("admin/adminLogin");
+  },
+
   resultPage: (req, res) => {
     res.render("admin/result");
   },
@@ -31,15 +35,15 @@ module.exports = {
     });
   },
 
-  // unblocked: async (req, res, next) => {
-  //   console.log(req.body);
+  unblocked: async (req, res, next) => {
+    console.log(req.body);
 
-  //   try {
-  //     adminHelper.dounblock(req.body.userId);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // },
+    try {
+      adminHelper.dounblock(req.body.userId);
+    } catch (error) {
+      console.log(error);
+    }
+  },
 
   addcandidatePage: (req, res, next) => {
     res.render("admin/addCandidates");
@@ -49,7 +53,7 @@ module.exports = {
     console.log(",2#R#$%");
     console.log(req.body);
     try {
-      adminHelper.doCandidate(req.body).then((response) => {
+      adminHelper.addCandidate(req.body).then((response) => {
         console.log(response);
         res.redirect("/admin/result");
       });

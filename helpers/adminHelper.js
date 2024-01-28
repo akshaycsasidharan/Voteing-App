@@ -29,13 +29,14 @@ module.exports = {
   },
 
   
-  doCandidate: (datacandidate) => {
+  addCandidate: (datacandidate) => {
     return new Promise(async (resolve, reject) => {
       console.log("candidatedata", datacandidate);
 
       let formdata = {
         name: datacandidate.name,
         designation: datacandidate.designation,
+        voteCount:0
       };
 
       console.log("candidatedata@#$%^&*%$##", formdata);
@@ -52,23 +53,24 @@ module.exports = {
     });
   },
 
-  // dounblock: (userId) => {
-  //   console.log("id called");
+  dounblock: (userId) => {
+    console.log("id called");
 
-  //   return new Promise(async (resolve, reject) => {
-  //     const db = await connectToMongoDB();
-  //     let getid = await db
-  //       .collection(collection.USER_COLLECTION)
-  //       .find(userId)
-  //       .then((response) => {
-  //         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!", response);
+    return new Promise(async (resolve, reject) => {
+      const db = await connectToMongoDB();
+      let getid = await db
+        .collection(collection.USER_COLLECTION)
+        .find(userId)
+        .then((response) => {
+          console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!", response);
 
-  //         if (blocked == true) {
-  //           res.redirect("/candidate");
-  //         } else {
-  //           res.redirect("/login");
-  //         }
-  //       });
-  //   });
-  // },
+          if (blocked == true) {
+            res.redirect("/candidate");
+          } else {
+            res.redirect("/login");
+          }
+        });
+    });
+  },
+
 };
