@@ -18,9 +18,29 @@ module.exports = {
     });
   },
 
+
   loginpage: (req,res,next) => {
     res.render("admin/adminLogin");
   },
+
+  adminlogin: (req,res,next) => {
+    console.log("function called");
+    console.log(req.body);
+    try {
+      
+      adminHelper.doAdminLogin(req.body).then(() => {
+        res.redirect("/admin/viewUser")
+
+      })
+
+    } catch (error) {
+      console.log(error);
+    }
+    
+  },
+  
+
+// ---------------------------------------------------------------------------------------------
 
   resultPage: (req, res) => {
     res.render("admin/result");
@@ -35,15 +55,27 @@ module.exports = {
     });
   },
 
-  unblocked: async (req, res, next) => {
-    console.log(req.body);
+// ----------------------------------------------------------------------------------------------
 
-    try {
-      adminHelper.dounblock(req.body.userId);
-    } catch (error) {
-      console.log(error);
-    }
-  },
+block: (req, res, next) => {
+  console.log("req.body",req.body);
+  console.log("req.param",req.params.id);
+  let id = req.params.id;
+  console.log(id);
+  adminHelper.blockUser(id,req.body).then((result) => {
+    res.redirect("/admin/viewUser");
+  });
+},
+
+unblock: (req, res) => {
+  let id = req.params.id;
+  console.log(id);
+  adminHelper.unblockUser(id,req.body).then((result) => {
+    res.redirect("/admin/viewUser");
+  });
+},
+
+  // -------------------------------------------------------------------------------------------
 
   addcandidatePage: (req, res, next) => {
     res.render("admin/addCandidates");

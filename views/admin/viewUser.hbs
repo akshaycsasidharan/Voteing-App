@@ -10,23 +10,13 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-  <style>
-
-    *{
-      background-color: LightGray;
-    }
-    .heading{
-        text-align: center;
-        margin-top: 25px;
-      }
-
-  </style>
+  
 </head>
-<body>
+<body style="background-color:  DarkGray;">
   
 
  <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-Dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="">Admin Panel</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -50,7 +40,7 @@
                     </li>
             </div>
         
-             <a class="nav-link active" aria-current="page" href="#">Signout</a>
+                <a class="nav-link active" style="color: aliceblue;" aria-current="page" href="#">Signout</a>
 
         </div>
     </nav>
@@ -58,7 +48,8 @@
 
 <section>
 
-    <h3 class="heading">USERS</h3>
+  <h3 class="heading" style="text-align: center;margin-top: 25px; text-decoration: underline padding-top:5">USERS</h3>
+
       <div class="container mt-5">
 
         <table class="table  table-hover table-dark">
@@ -82,73 +73,38 @@
               <td>{{this.email}}</td>
               <td>
 
-        {{#if this.blocked}}
+         {{#if this.blocked}} 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
-  Block
-</button>
+<!-- Use a form for the unblock button -->
+<form action="/admin/unblock/{{this._id}}" method="post" style="display:inline;">
+  <input type="hidden" name="_method" value="POST">
+  <input type="hidden" name="userId" value="{{this._id}}">
+  <input type="hidden" name="userName" value="{{this.name}}">
+  <!-- Add more hidden input fields as needed -->
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Information</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-             <h5>Are you sure , You want to block the user</h5>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary">Yes</button>
-      </div>
-    </div>
-  </div>
-</div>          
+  <button type="submit" class="btn btn-success" style="width: 85px;">unblock</button>
+</form>
 
 {{else}}
 
 
+<form action="/admin/block/{{this._id}}" method="post" style="display:inline;">
+  <input type="hidden" name="_method" value="POST">
+  <input type="hidden" name="userId" value="{{this._id}}">
+  <input type="hidden" name="userName" value="{{this.name}}">
+    <input type="hidden" name="email" value="{{this.email}}">
 
-<!-- Button trigger modal -->
-<a href="/admim/unblockuser"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
-  Unblock
-</button></a>
+  <!-- Add more hidden input fields as needed -->
 
-</a>
+  <button type="submit" class="btn btn-danger" style="width: 85px;">block</button>
+</form>
 
+{{/if}} 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"> Information</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure , You want to unblock the user</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary"> Yes</button>
-      </div>
-    </div>
-  </div>
-</div>         
 </td>
-</tr>
-
-{{/if}}
     {{/each}}
           </tbody>
         </table>
 </body>
+
 </html>

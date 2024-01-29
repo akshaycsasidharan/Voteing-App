@@ -1,5 +1,8 @@
+require("dotenv").config();
 var { connectToMongoDB } = require("../config/connection");
 const collection = require("../config/collection");
+const { ObjectId } = require("mongodb");
+const { response } = require("../app");
 
 module.exports = {
   getUsersData: () => {
@@ -16,6 +19,7 @@ module.exports = {
     });
   },
 
+  //---------------------------------------------------------------------------------------- 
 
   getcandidatedata : () =>{
     console.log("candidate result");
@@ -53,24 +57,87 @@ module.exports = {
     });
   },
 
-  dounblock: (userId) => {
-    console.log("id called");
+//---------------------------------------------------------------------------------------- 
 
+
+  blockUser: (userid) => {
+    return new Promise(async (resolve, reject) => {
+      console.log("qWWWEWFEW##@%#$%$@^", userid);
+  let id =  userid
+  console.log("@@@@@@@@@@",id);
+      const db = await connectToMongoDB();
+  
+      await db
+        .collection(collection.USER_COLLECTION)
+        .updateOne(
+          { _id: new ObjectId (userid) },
+          {$set : {
+            blocked:true
+          }}
+        )
+        .then((result) => {
+          // Check if the update was successful
+          if (result.matchedCount > 0) {
+            resolve();
+          } else {
+            reject(new Error("User not found or not updated"));
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
+        }
+    )
+  },
+  
+
+  unblockUser: (userid) => {
     return new Promise(async (resolve, reject) => {
       const db = await connectToMongoDB();
-      let getid = await db
+  
+      await db
         .collection(collection.USER_COLLECTION)
-        .find(userId)
-        .then((response) => {
-          console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!", response);
-
-          if (blocked == true) {
-            res.redirect("/candidate");
-          } else {
-            res.redirect("/login");
+        .updateOne(
+          { _id: new ObjectId (userid) },
+          {
+            $set: { blocked: false },
           }
+        )
+        .then((result) => {
+          // Check if the update was successful
+          if (result.matchedCount > 0) {
+            resolve();
+          } else {
+            reject(new Error("User not found or not updated"));
+          }
+        })
+        .catch((error) => {
+          reject(error);
         });
     });
   },
+  
+//---------------------------------------------------------------------------------------- 
 
-};
+  doAdminLogin :(admindata) => {
+
+     let adminPassword = process.env.PASSWORD
+     let adminEmail = process.env.EMAIL
+
+     console.log("dkndkjnvkjwvn!!!!!",adminPassword);
+     console.log("dkndkjnvkjwvn!!!!!",adminEmail);
+
+    
+    return new Promise((resolve, reject) => {
+      console.log("!@##$$%^**",admindata);
+       if(admindata.email == adminEmail  && admindata.password == adminPassword){
+        console.log("@#$$$$$$$$444--------- login success");
+        resolve()
+       }
+    })
+  },
+
+}
+
+
+
