@@ -4,22 +4,15 @@ var { connectToMongoDB } = require("../config/connection");
 var collection = require("../config/collection");
 var userHelper = require("../helpers/userHelper");
 
-// router.get('/',function(req,res,next) {
-//     res.render('index')
-//   });
 
-router.get("/candidate", function (req, res, next) {
-  let user = req.session.user;
-
-  res.render("user/candidate");
-});
 
 const {
   signupPage,
   signup,
   loginPage,
   login,
-   candidatePage
+  candidatepage,
+  vote
 } = require("../controllers/userController");
 
 router.get("/signup", signupPage);
@@ -30,11 +23,9 @@ router.get("/", loginPage);
 
 router.post("/login", login);
 
-router.get("/candidate", candidatePage);
+router.get("/candidate",candidatepage);
 
-// router.get('/logout',(req,res)=>{
-//   req.session.destroy()
-//   res.redirect('/')
-// })
+router.post("/vote/:id",vote)
+
 
 module.exports = router;

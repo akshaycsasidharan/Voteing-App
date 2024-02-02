@@ -4,6 +4,11 @@ var { connectToMongoDB } = require("../config/connection");
 var collection = require("../config/collection");
 var adminHelper = require("../helpers/adminHelper");
 
+const {
+
+  upload
+
+} = require ("../public/javascripts/multer");
 
 
 const {
@@ -15,7 +20,8 @@ const {
   block,
    loginpage,
    adminlogin,
-   unblock
+   unblock,
+   adminsignout
 
 } = require("../controllers/adminController");
 
@@ -30,11 +36,13 @@ router.post("/login",adminlogin);
 
  router.post("/unblock/:id",unblock);
 
-router.get("/addCandidates", addcandidatePage);
+router.get("/addCandidates",  addcandidatePage);
 
-router.post("/candidateadd",Candidatesadd);
+router.post("/candidateadd",upload.single('image'),Candidatesadd);
 
 router.get("/result", resultPage);
+
+router.get('/signout',adminsignout)
  
 
 module.exports = router;

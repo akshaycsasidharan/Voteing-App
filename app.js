@@ -6,7 +6,7 @@ var logger = require("morgan");
 var hbs = require("express-handlebars");
 let Hbs = require("handlebars");
 var session = require("express-session");
-var fileupload = require("express-fileupload");
+// var fileupload = require("express-fileupload");
 
 var usersRouter = require("./routes/users");
 var adminRouter = require("./routes/admin");
@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(session({ secret: "key", cookie: { maxAge: 600000 } }));
-app.use(fileupload());
+// app.use(fileupload());
 
 app.use("/", usersRouter);
 

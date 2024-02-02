@@ -5,8 +5,8 @@ const { ObjectId } = require("mongodb");
 const { response } = require("../app");
 
 module.exports = {
+
   getUsersData: () => {
-    console.log("function called");
 
     return new Promise(async (resolve, reject) => {
       const db = await connectToMongoDB();
@@ -14,36 +14,24 @@ module.exports = {
         .collection(collection.USER_COLLECTION)
         .find({})
         .toArray();
-      console.log("getdata", getdata);
       resolve(getdata);
     });
   },
 
   //---------------------------------------------------------------------------------------- 
-
-  getcandidatedata : () =>{
-    console.log("candidate result");
-
-    return new Promise (async (resolve,reject) => {
-      const db = await connectToMongoDB();
-      let getcandidate = await db.collection(collection.CANDIDATE_COLLECTION).find({}).toArray();
-      console.log("getcandidatedata",getcandidate);
-      resolve(getcandidate);
-    })
-  },
-
   
-  addCandidate: (datacandidate) => {
+  addCandidate: (datacandidate,file) => {
+    console.log("candidatedata",datacandidate);
+    console.log("file",file);
     return new Promise(async (resolve, reject) => {
-      console.log("candidatedata", datacandidate);
 
       let formdata = {
         name: datacandidate.name,
         designation: datacandidate.designation,
+        Image : file.filename,
         voteCount:0
       };
 
-      console.log("candidatedata@#$%^&*%$##", formdata);
 
       const db = await connectToMongoDB();
 
@@ -51,7 +39,6 @@ module.exports = {
         .collection(collection.CANDIDATE_COLLECTION)
         .insertOne(formdata)
         .then((data) => {
-          console.log(data);
           resolve(data.insertedId);
         });
     });
@@ -59,6 +46,17 @@ module.exports = {
 
 //---------------------------------------------------------------------------------------- 
 
+getcandidatedata : () =>{
+
+  return new Promise (async (resolve,reject) => {
+    const db = await connectToMongoDB();
+    let getcandidate = await db.collection(collection.CANDIDATE_COLLECTION).find({}).toArray();
+    console.log("getcandidatedata",getcandidate);
+    resolve(getcandidate);
+  })
+},
+
+// ------------------------------------------------------------------------------------------------------
 
   blockUser: (userid) => {
     return new Promise(async (resolve, reject) => {
@@ -123,20 +121,27 @@ module.exports = {
 
      let adminPassword = process.env.PASSWORD
      let adminEmail = process.env.EMAIL
-
-     console.log("dkndkjnvkjwvn!!!!!",adminPassword);
-     console.log("dkndkjnvkjwvn!!!!!",adminEmail);
-
     
     return new Promise((resolve, reject) => {
-      console.log("!@##$$%^**",admindata);
        if(admindata.email == adminEmail  && admindata.password == adminPassword){
-        console.log("@#$$$$$$$$444--------- login success");
         resolve()
        }
     })
   },
 
+
+  adminsignout : async (req,res) => {
+
+    try {
+      
+      
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+  
 }
 
 

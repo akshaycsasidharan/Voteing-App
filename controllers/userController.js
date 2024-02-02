@@ -5,6 +5,7 @@ const { render } = require("../app");
 const userHelper = require("../helpers/userHelper");
 
 module.exports = {
+
   signupPage: (req, res, next) => {
     res.render("user/signupPage");
   },
@@ -49,11 +50,21 @@ module.exports = {
 
   // -------------------------------------------------------------------------------------------------------------
 
-  candidatePage: (req, res, next) => {
-    res.render("user/candidate");
+  candidatepage: (req, res) => {
+    console.log("hello#######");
+    userHelper.showcandidates().then(async (showcand) => {
+      console.log("showcand",showcand);
+      console.log("!!!!@@@@@!!!!!!!!!!");
+      res.render("user/candidate", {
+        showcand,
+      });
+    });
   },
 
-  
 
+
+  vote: (req,res) =>{
+    
+  }
 
 };

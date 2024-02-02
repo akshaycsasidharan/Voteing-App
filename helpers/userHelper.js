@@ -5,6 +5,7 @@ var collection = require("../config/collection");
 const bcrypt = require("bcrypt");
 
 module.exports = {
+  
   doSignup: (userData) => {
     return new Promise(async (resolve, reject) => {
       console.log(userData);
@@ -41,6 +42,8 @@ module.exports = {
     });
   },
 
+// ------------------------------------------------------------------------------------
+
   doLogin: (loginData) => {
     return new Promise(async (resolve, reject) => {
       console.log("logindata", loginData);
@@ -72,4 +75,19 @@ module.exports = {
       }
     });
   },
+
+// ------------------------------------------------------------------------------------------------------
+  
+  showcandidates : () => {
+    console.log("candidate result");
+
+    return new Promise (async (resolve,reject) => {
+      const db = await connectToMongoDB();
+      let showcand = await db.collection(collection.CANDIDATE_COLLECTION).find({}).toArray();
+      console.log("getcandidatedata",showcand);
+      resolve(showcand);
+    })
+  },
+
+
 };

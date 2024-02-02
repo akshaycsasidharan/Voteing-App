@@ -532,7 +532,7 @@ a.btn-goback:hover {
 </style>
 
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
         <div class="container-fluid">
             <a class="navbar-brand" href="">Admin Panel</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -563,28 +563,29 @@ a.btn-goback:hover {
 </header>
 
 
-      <h3 class="heading" style="text-align: center; margin-top: 25px;text-decoration: underline">ADD CANDIDATES</h3>
+ <h3 class="heading" style="text-align: center; margin-top: 25px;text-decoration: underline">ADD CANDIDATES</h3>
 
-
-
-<div class="container">
-  <div class="frame">
-    <div class="nav">
-      <ul class"links">
-        <li class="signin-active"><a class="btn">Add Candidates</a></li>
-      </ul>
-    </div>
-    <div ng-app ng-init="checked = false">
-				        <form class="form-signin" action="/admin/candidateadd" method="post" name="form">
+  <div class="container">
+    <div class="frame">
+      <div class="nav">
+        <ul class"links">
+          <li class="signin-active"><a class="btn">Add Candidates</a></li>
+        </ul>
+      </div>
+      <div ng-app ng-init="checked = false">
+        <form class="form-signin" action="/admin/candidateadd" method="post" enctype="multipart/form-data">
           <label for="name"> name</label>
-          <input class="form-styling" type="text" name="name" placeholder=""/>
+          <input class="form-styling" type="text" name="name" placeholder="" />
           <label for="designation">Designation</label>
-          <input class="form-styling" type="text" name="designation" placeholder=""/>
-           <label for="image">Symbol</label>
-          <input type="file" name="image"  class="form-control"> 
-          <button type="submit" class="btn-signup">Submit</button> 
+          <input class="form-styling" type="text" name="designation" placeholder="" />
+          <label for="id_image">Symbol</label>
+          <input type="file"  accept="image/*" name="image" class="form-control">
+          <button type="submit" class="btn-signup">Submit</button>
         </form>
-          
+      </div> <!-- Closing div for ng-app/ng-init -->
+    </div> <!-- Closing div for frame -->
+  </div> <!-- Closing div for container -->
+
 </body>
 </html>
 
