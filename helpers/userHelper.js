@@ -3,17 +3,17 @@
 var { connectToMongoDB } = require("../config/connection");
 var collection = require("../config/collection");
 const bcrypt = require("bcrypt");
+const { ObjectId } = require("mongodb");
 
 module.exports = {
-  
   doSignup: (userData) => {
     return new Promise(async (resolve, reject) => {
       console.log(userData);
 
       if (userData.password === userData.confirmpassword) {
-        console.log(" @##$@#$%&*^^%$##$%^^&&&%E#@successed");
+        // console.log(" @##$@#$%&*^^%$##$%^^&&&%E#@successed");
         var encryptedpassword = await bcrypt.hash(userData.password, 10);
-        console.log(encryptedpassword);
+        // console.log(encryptedpassword);
       } else {
         console.log("error");
         throw new Error("given passwords are not same");
@@ -28,7 +28,7 @@ module.exports = {
         vote: false,
       };
 
-      console.log(signupData);
+      // console.log(signupData);
 
       const db = await connectToMongoDB();
 
@@ -36,18 +36,18 @@ module.exports = {
         .collection(collection.USER_COLLECTION)
         .insertOne(signupData)
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           resolve(data.insertedId);
         });
     });
   },
 
-// ------------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------
 
   doLogin: (loginData) => {
     return new Promise(async (resolve, reject) => {
-      console.log("logindata", loginData);
-      console.log("hekjcdnckjsdnj", loginData.password, loginData.email);
+      // console.log("logindata", loginData);
+      // console.log("hekjcdnckjsdnj", loginData.password, loginData.email);
       let loginstatus = false;
       let response = {};
       const db = await connectToMongoDB();
@@ -55,39 +55,96 @@ module.exports = {
         .collection(collection.USER_COLLECTION)
         .findOne({ email: loginData.email });
 
-      console.log("hello", user);
+      // console.log("hello", user);
       if (user) {
         bcrypt.compare(loginData.password, user.password).then((status) => {
-          console.log(status);
+          // console.log(status);
           if (status) {
             console.log("login success");
             response.user = user;
             response.status = true;
             resolve(response);
           } else {
-            console.log("login failed");
+            // console.log("login failed");
             resolve({ status: false });
           }
         });
       } else {
-        console.log("email does not exist");
+        // console.log("email does not exist");
         resolve({ status: false });
       }
     });
   },
 
-// ------------------------------------------------------------------------------------------------------
-  
-  showcandidates : () => {
-    console.log("candidate result");
+  // ------------------------------------------------------------------------------------------------------
 
-    return new Promise (async (resolve,reject) => {
+  showcandidates: () => {
+    // console.log("candidate result");
+
+    return new Promise(async (resolve, reject) => {
       const db = await connectToMongoDB();
-      let showcand = await db.collection(collection.CANDIDATE_COLLECTION).find({}).toArray();
-      console.log("getcandidatedata",showcand);
+      let showcand = await db
+        .collection(collection.CANDIDATE_COLLECTION)
+        .find({})
+        .toArray();
+      // console.log("getcandidatedata",showcand);
       resolve(showcand);
-    })
+    });
   },
 
+  // ----------------------------------------------------------
 
+  dovote: (canddataid) => {
+
+    return new Promise(async (resolve, reject) => {
+
+      let id = canddataid;
+
+      const db = await connectToMongoDB();
+
+      await db
+        .collection(collection.CANDIDATE_COLLECTION)
+        .updateOne(
+          { _id: new ObjectId(canddataid) },
+          { $inc: { voteCount: 1 }}
+        )
+        .then((result) => {
+          
+          if (result.matchedCount > 0) {
+            resolve();
+          } else {
+            reject(new Error("User not found or not updated"));
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
+
+  // dovote: (userid) => {
+  //   return new Promise(async (resolve, reject) => {
+  //     const db = await connectToMongoDB();
+
+  //     await db
+  //       .collection(collection.CANDIDATE_COLLECTION)
+  //       .updateOne(
+  //         { _id: new ObjectId (userid) },
+  //         {
+  //           $set: { voteCount: false },
+  //         }
+  //       )
+  //       .then((result) => {
+  //         // Check if the update was successful
+  //         if (result.matchedCount > 0) {
+  //           resolve();
+  //         } else {
+  //           reject(new Error("User not found or not updated"));
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         reject(error);
+  //       });
+  //   });
+  // },
 };

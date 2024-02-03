@@ -21,8 +21,8 @@ module.exports = {
   //---------------------------------------------------------------------------------------- 
   
   addCandidate: (datacandidate,file) => {
-    console.log("candidatedata",datacandidate);
-    console.log("file",file);
+    // console.log("candidatedata",datacandidate);
+    // console.log("file",file);
     return new Promise(async (resolve, reject) => {
 
       let formdata = {
@@ -51,18 +51,33 @@ getcandidatedata : () =>{
   return new Promise (async (resolve,reject) => {
     const db = await connectToMongoDB();
     let getcandidate = await db.collection(collection.CANDIDATE_COLLECTION).find({}).toArray();
-    console.log("getcandidatedata",getcandidate);
     resolve(getcandidate);
   })
+},
+
+
+
+viewcandidates : () => {
+
+  return new Promise (async (resolve,reject) => {
+    const db = await connectToMongoDB();
+    let viewcandidates = await db.collection(collection.CANDIDATE_COLLECTION).find({}).toArray();
+    resolve(viewcandidates);
+  })
+
 },
 
 // ------------------------------------------------------------------------------------------------------
 
   blockUser: (userid) => {
     return new Promise(async (resolve, reject) => {
-      console.log("qWWWEWFEW##@%#$%$@^", userid);
+
+      // console.log("qWWWEWFEW##@%#$%$@^", userid);
+
   let id =  userid
-  console.log("@@@@@@@@@@",id);
+
+  // console.log("@@@@@@@@@@",id);
+  
       const db = await connectToMongoDB();
   
       await db
@@ -129,18 +144,8 @@ getcandidatedata : () =>{
     })
   },
 
-
-  adminsignout : async (req,res) => {
-
-    try {
-      
-      
-
-    } catch (error) {
-      console.log(error);
-    }
-
-  }
+// ---------------------------------------------------------------------------------------
+ 
   
 }
 

@@ -32,7 +32,11 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/admin/addCandidates">Candidates</a>
+                        <a class="nav-link active" aria-current="page" href="/admin/viewcandidate">viewcandidate</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin/addCandidates">AddCandidates</a>
                     </li>
 
                     <li class="nav-item">
@@ -77,9 +81,9 @@
 
 <!-- Use a form for the unblock button -->
 <form action="/admin/unblock/{{this._id}}" method="post" style="display:inline;">
-  <input type="hidden" name="_method" value="POST">
+  {{!-- <input type="hidden" name="_method" value="POST">
   <input type="hidden" name="userId" value="{{this._id}}">
-  <input type="hidden" name="userName" value="{{this.name}}">
+  <input type="hidden" name="userName" value="{{this.name}}"> --}}
   <!-- Add more hidden input fields as needed -->
 
   <button type="submit" class="btn btn-success" style="width: 85px;">unblock</button>
@@ -89,10 +93,10 @@
 
 
 <form action="/admin/block/{{this._id}}" method="post" style="display:inline;">
-  <input type="hidden" name="_method" value="POST">
+  {{!-- <input type="hidden" name="_method" value="POST">
   <input type="hidden" name="userId" value="{{this._id}}">
   <input type="hidden" name="userName" value="{{this.name}}">
-    <input type="hidden" name="email" value="{{this.email}}">
+    <input type="hidden" name="email" value="{{this.email}}"> --}}
 
   <!-- Add more hidden input fields as needed -->
 

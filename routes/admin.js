@@ -21,7 +21,8 @@ const {
    loginpage,
    adminlogin,
    unblock,
-   adminsignout
+   viewcandidate,
+   deletecandidate
 
 } = require("../controllers/adminController");
 
@@ -42,7 +43,10 @@ router.post("/candidateadd",upload.single('image'),Candidatesadd);
 
 router.get("/result", resultPage);
 
-router.get('/signout',adminsignout)
+router.get("/viewcandidate",viewcandidate);
+
+router.post("/delete/:id",deletecandidate);
+
  
 
 module.exports = router;

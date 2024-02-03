@@ -7,7 +7,7 @@ module.exports = {
   
   viewUserspage: (req, res, next) => {
     adminHelper.getUsersData().then(async (usersdata) => {
-      
+      console.log("userdata",usersdata);
       res.render("admin/viewUser", {
         usersdata,
       });
@@ -50,13 +50,49 @@ module.exports = {
     });
   },
 
+// ------------------------------------------------------------------------------------
+
+  viewcandidate: (req,res) => {
+  
+    adminHelper.viewcandidates().then(async(viewdata) => {
+      res.render("admin/viewcandidate", {
+        viewdata,
+      })
+    })
+  },
+
+
+  vote: (req,res,next) => {
+
+    console.log("hello dears",req.body);
+
+    let id = req.params.id;
+
+    
+      userHelper.dovote(id).then((result) => {
+
+        res.redirect("/candidate")
+
+      });
+
+  },
+
+  deletecandidate : (req,res,next) => {
+
+    let id = req.params.id;
+
+    adminHelper.deletecand(id).then()
+
+  },
+
+
 // ----------------------------------------------------------------------------------------------
 
 block: (req, res, next) => {
   
   let id = req.params.id;
 
-  adminHelper.blockUser(id,req.body).then((result) => {
+  adminHelper.blockUser(id).then((result) => {
     res.redirect("/admin/viewUser");
   });
 },
@@ -65,7 +101,7 @@ unblock: (req, res) => {
 
   let id = req.params.id;
 
-  adminHelper.unblockUser(id,req.body).then((result) => {
+  adminHelper.unblockUser(id).then((result) => {
     res.redirect("/admin/viewUser");
   });
 },
@@ -77,7 +113,7 @@ unblock: (req, res) => {
   },
 
   Candidatesadd: (req, res) => {
-    console.log("req.file",req.file);
+    // console.log("req.file",req.file);
     
     try {
       adminHelper.addCandidate(req.body,req.file).then((response) => {
@@ -88,18 +124,8 @@ unblock: (req, res) => {
     }
   },
 
+//---------------------------------------------------------------------------------------------- 
 
-  adminsignout : (req,res) => {
-
-    try {
-      
-      adminHelper.adminsignout()
-
-    } catch (error) {
-
-      console.log(error);
-
-    }
-  }
+ 
 
 };

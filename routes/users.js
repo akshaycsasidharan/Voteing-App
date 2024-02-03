@@ -25,7 +25,7 @@ router.post("/login", login);
 
 router.get("/candidate",candidatepage);
 
-router.post("/vote/:id",vote)
+router.post("/vote/:id",vote);
 
 
 module.exports = router;

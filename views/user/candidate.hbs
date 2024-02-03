@@ -96,19 +96,29 @@
 
               <tr>
                 <th scope="row">1</th>
-                {{!-- <td>{{this.Image}}</td> --}}
-                <td>{{this.name}}</td>
-                <td>{{this.designation}}</td>
-
                 <td>
+
+                <img style="width: 50px; height:50px" src="/images/sign-images/{{this.Image}}" alt="">
+
+                </td>
+                <td>{{this.name}}</td>
+                <td>
+
+                  <form action="/vote/{{this._id}}" method="post" style="display:inline;">
+                  {{!-- <input type="hidden" name="_method" value="POST">
+                  <input type="hidden" name="userId" value="{{this.name}}"> --}}
+                  {{!-- <input type="hidden" name="userName" value="{{this.designation}}"> --}}
+
                   <button
-                    type="button"
+                    type="submit"
                     class="btn btn-success"
                     data-toggle="modal"
                     data-target="#exampleModalCenter"
                   >
                     vote
                   </button>
+                </form>
+
                 </td>
               </tr>
 

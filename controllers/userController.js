@@ -11,31 +11,26 @@ module.exports = {
   },
 
   signup: (req, res) => {
-    console.log("function called");
-    console.log(req.body);
+    
     try {
       userHelper.doSignup(req.body).then((response) => {
-        console.log(response);
         res.redirect("/");
       });
     } catch (error) {
       console.log(error);
     }
   },
-  //----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
   loginPage: (req, res, next) => {
     res.render("user/userLogin");
   },
 
   login: (req, res, next) => {
-    console.log("function called");
-    console.log(req.body);
+    
     try {
       userHelper.doLogin(req.body).then((response) => {
-        console.log(response);
         if (response.status) {
-          console.log(response.status);
           req.session.loggedIn = true;
           req.session.user = response.user;
           res.redirect("/candidate");
@@ -48,23 +43,32 @@ module.exports = {
     }
   },
 
-  // -------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
 
   candidatepage: (req, res) => {
-    console.log("hello#######");
     userHelper.showcandidates().then(async (showcand) => {
-      console.log("showcand",showcand);
-      console.log("!!!!@@@@@!!!!!!!!!!");
       res.render("user/candidate", {
         showcand,
       });
     });
   },
 
+// -------------------------------------------------------------------------------------------------------------
 
 
-  vote: (req,res) =>{
+  vote: (req,res,next) => {
+
+    console.log("hello dears",req.body);
+
+    let id = req.params.id;
+
     
-  }
+      userHelper.dovote(id).then((result) => {
+
+        res.redirect("/candidate")
+
+      });
+
+  },
 
 };
