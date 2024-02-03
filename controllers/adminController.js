@@ -62,27 +62,12 @@ module.exports = {
   },
 
 
-  vote: (req,res,next) => {
 
-    console.log("hello dears",req.body);
-
+  deletecandidate: (req, res) => {
     let id = req.params.id;
-
-    
-      userHelper.dovote(id).then((result) => {
-
-        res.redirect("/candidate")
-
-      });
-
-  },
-
-  deletecandidate : (req,res,next) => {
-
-    let id = req.params.id;
-
-    adminHelper.deletecand(id).then()
-
+    adminHelper.deletecand(id).then(() => {
+      res.redirect("/admin/viewcandidate"); // Corrected redirect path
+    });
   },
 
 

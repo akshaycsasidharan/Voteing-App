@@ -29,7 +29,7 @@ module.exports = {
         name: datacandidate.name,
         designation: datacandidate.designation,
         Image : file.filename,
-        voteCount:0
+        voteCount:0,
       };
 
 
@@ -65,6 +65,26 @@ viewcandidates : () => {
     resolve(viewcandidates);
   })
 
+},
+
+
+deletecand: (deleteid) => {
+  return new Promise(async (resolve, reject) => {
+    const db = await connectToMongoDB();
+    await db
+      .collection(collection.CANDIDATE_COLLECTION)
+      .deleteOne({ _id: new ObjectId(deleteid) })
+      .then((result) => {
+        if (result.deletedCount > 0) {
+          resolve();
+        } else {
+          reject(new Error("Document not found or not deleted"));
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 },
 
 // ------------------------------------------------------------------------------------------------------

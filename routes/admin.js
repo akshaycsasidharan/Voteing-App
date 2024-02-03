@@ -45,8 +45,7 @@ router.get("/result", resultPage);
 
 router.get("/viewcandidate",viewcandidate);
 
-router.post("/delete/:id",deletecandidate);
-
+router.post("/delete/:id", deletecandidate);
  
 
 module.exports = router;
