@@ -85,9 +85,8 @@ module.exports = {
       const db = await connectToMongoDB();
       let showcand = await db
         .collection(collection.CANDIDATE_COLLECTION)
-        .find({})
+        .find({ deleted: false })
         .toArray();
-      // console.log("getcandidatedata",showcand);
       resolve(showcand);
     });
   },
@@ -95,9 +94,7 @@ module.exports = {
   // ----------------------------------------------------------
 
   dovote: (canddataid) => {
-
     return new Promise(async (resolve, reject) => {
-
       let id = canddataid;
 
       const db = await connectToMongoDB();
@@ -106,10 +103,9 @@ module.exports = {
         .collection(collection.CANDIDATE_COLLECTION)
         .updateOne(
           { _id: new ObjectId(canddataid) },
-          { $inc: { voteCount: 1 }}
+          { $inc: { voteCount: 1 } }
         )
         .then((result) => {
-          
           if (result.matchedCount > 0) {
             resolve();
           } else {
@@ -122,29 +118,4 @@ module.exports = {
     });
   },
 
-  // dovote: (userid) => {
-  //   return new Promise(async (resolve, reject) => {
-  //     const db = await connectToMongoDB();
-
-  //     await db
-  //       .collection(collection.CANDIDATE_COLLECTION)
-  //       .updateOne(
-  //         { _id: new ObjectId (userid) },
-  //         {
-  //           $set: { voteCount: false },
-  //         }
-  //       )
-  //       .then((result) => {
-  //         // Check if the update was successful
-  //         if (result.matchedCount > 0) {
-  //           resolve();
-  //         } else {
-  //           reject(new Error("User not found or not updated"));
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         reject(error);
-  //       });
-  //   });
-  // },
 };

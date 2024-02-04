@@ -5,9 +5,7 @@ const { ObjectId } = require("mongodb");
 const { response } = require("../app");
 
 module.exports = {
-
   getUsersData: () => {
-
     return new Promise(async (resolve, reject) => {
       const db = await connectToMongoDB();
       let getdata = await db
@@ -18,20 +16,17 @@ module.exports = {
     });
   },
 
-  //---------------------------------------------------------------------------------------- 
-  
-  addCandidate: (datacandidate,file) => {
-    // console.log("candidatedata",datacandidate);
-    // console.log("file",file);
-    return new Promise(async (resolve, reject) => {
+  //----------------------------------------------------------------------------------------
 
+  addCandidate: (datacandidate, file) => {
+    return new Promise(async (resolve, reject) => {
       let formdata = {
         name: datacandidate.name,
         designation: datacandidate.designation,
-        Image : file.filename,
-        voteCount:0,
+        Image: file.filename,
+        voteCount: 0,
+        deleted: false,
       };
-
 
       const db = await connectToMongoDB();
 
@@ -44,72 +39,39 @@ module.exports = {
     });
   },
 
-//---------------------------------------------------------------------------------------- 
+  //----------------------------------------------------------------------------------------
 
-getcandidatedata : () =>{
-
-  return new Promise (async (resolve,reject) => {
-    const db = await connectToMongoDB();
-    let getcandidate = await db.collection(collection.CANDIDATE_COLLECTION).find({}).toArray();
-    resolve(getcandidate);
-  })
-},
-
-
-
-viewcandidates : () => {
-
-  return new Promise (async (resolve,reject) => {
-    const db = await connectToMongoDB();
-    let viewcandidates = await db.collection(collection.CANDIDATE_COLLECTION).find({}).toArray();
-    resolve(viewcandidates);
-  })
-
-},
-
-
-deletecand: (deleteid) => {
-  return new Promise(async (resolve, reject) => {
-    const db = await connectToMongoDB();
-    await db
-      .collection(collection.CANDIDATE_COLLECTION)
-      .deleteOne({ _id: new ObjectId(deleteid) })
-      .then((result) => {
-        if (result.deletedCount > 0) {
-          resolve();
-        } else {
-          reject(new Error("Document not found or not deleted"));
-        }
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-},
-
-// ------------------------------------------------------------------------------------------------------
-
-  blockUser: (userid) => {
+  getcandidatedata: () => {
     return new Promise(async (resolve, reject) => {
-
-      // console.log("qWWWEWFEW##@%#$%$@^", userid);
-
-  let id =  userid
-
-  // console.log("@@@@@@@@@@",id);
-  
       const db = await connectToMongoDB();
-  
+      let getcandidate = await db
+        .collection(collection.CANDIDATE_COLLECTION)
+        .find({})
+        .toArray();
+      resolve(getcandidate);
+    });
+  },
+
+  viewcandidates: () => {
+    return new Promise(async (resolve, reject) => {
+      const db = await connectToMongoDB();
+      let viewcandidates = await db
+        .collection(collection.CANDIDATE_COLLECTION)
+        .find({
+          deleted: false,
+        })
+        .toArray();
+      resolve(viewcandidates);
+    });
+  },
+
+  deletecand: (deleteid) => {
+    return new Promise(async (resolve, reject) => {
+      const db = await connectToMongoDB();
       await db
-        .collection(collection.USER_COLLECTION)
-        .updateOne(
-          { _id: new ObjectId (userid) },
-          {$set : {
-            blocked:true
-          }}
-        )
+        .collection(collection.CANDIDATE_COLLECTION)
+        .updateOne({ _id: new ObjectId(deleteid) }, { $set: { deleted: true } })
         .then((result) => {
-          // Check if the update was successful
           if (result.matchedCount > 0) {
             resolve();
           } else {
@@ -119,19 +81,123 @@ deletecand: (deleteid) => {
         .catch((error) => {
           reject(error);
         });
-        }
-    )
+    });
   },
-  
+
+  // editcandidate : (editid) => {
+
+  //   return new Promise(async (resolve, reject) => {
+  //     const db = await connectToMongoDB();
+  //     await db
+  //       .collection(collection.CANDIDATE_COLLECTION)
+  //       .findOne({ _id: new ObjectId(editid)  })
+  //       .then((result) => {
+
+  //         console.log("@@@@@@@@@@@@@@@@@",result);
+
+  //         if (result.matchedCount > 0) {
+  //           resolve(result);
+  //         } else {
+  //           reject(new Error("User not found or not updated"));
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         reject(error);
+  //       });
+  //   });
+
+  // },
+
+  editcandidate: (editid) => {
+    return new Promise(async (resolve, reject) => {
+      const db = await connectToMongoDB();
+      await db
+        .collection(collection.CANDIDATE_COLLECTION)
+        .findOne({ _id: new ObjectId(editid) })
+        .then((result) => {
+          // console.log("@@@@@@@@@@@@@@@@@", result);
+
+          if (result) {
+            resolve(result);
+          } else {
+            reject(new Error("Candidate not found"));
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
+
+  candupdate: (updateid, updatedetails) => {
+    return new Promise(async (resolve, reject) => {
+      const db = await connectToMongoDB();
+      await db
+        .collection(collection.CANDIDATE_COLLECTION)
+        .updateOne(
+          { _id: new ObjectId(updateid) },
+          {
+            $set: {
+              name : updatedetails.name,
+              designation : updatedetails.designation
+            },
+          }
+        )
+        .then((result) => {
+
+          if (result) {
+            resolve(result);
+          } else {
+            reject(new Error("Candidate not found"));
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
+
+  // ------------------------------------------------------------------------------------------------------
+
+  blockUser: (userid) => {
+    return new Promise(async (resolve, reject) => {
+      let id = userid;
+
+      const db = await connectToMongoDB();
+
+      await db
+        .collection(collection.USER_COLLECTION)
+        .updateOne(
+          { _id: new ObjectId(userid) },
+          {
+            $set: {
+              blocked: true,
+            },
+          }
+        )
+        .then((result) => {
+          // Check if the update was successful
+
+          if (result.matchedCount > 0) {
+            resolve();
+          } else {
+            reject(new Error("User not found or not updated"));
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
 
   unblockUser: (userid) => {
     return new Promise(async (resolve, reject) => {
       const db = await connectToMongoDB();
-  
+
       await db
         .collection(collection.USER_COLLECTION)
         .updateOne(
-          { _id: new ObjectId (userid) },
+          { _id: new ObjectId(userid) },
           {
             $set: { blocked: false },
           }
@@ -149,25 +215,22 @@ deletecand: (deleteid) => {
         });
     });
   },
-  
-//---------------------------------------------------------------------------------------- 
 
-  doAdminLogin :(admindata) => {
+  //----------------------------------------------------------------------------------------
 
-     let adminPassword = process.env.PASSWORD
-     let adminEmail = process.env.EMAIL
-    
+  doAdminLogin: (admindata) => {
+    let adminPassword = process.env.PASSWORD;
+    let adminEmail = process.env.EMAIL;
+
     return new Promise((resolve, reject) => {
-       if(admindata.email == adminEmail  && admindata.password == adminPassword){
-        resolve()
-       }
-    })
+      if (
+        admindata.email == adminEmail &&
+        admindata.password == adminPassword
+      ) {
+        resolve();
+      }
+    });
   },
 
-// ---------------------------------------------------------------------------------------
- 
-  
-}
-
-
-
+  // ---------------------------------------------------------------------------------------
+};

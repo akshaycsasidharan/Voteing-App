@@ -22,7 +22,9 @@ const {
    adminlogin,
    unblock,
    viewcandidate,
-   deletecandidate
+   deletecandidate,
+   editcandidate,
+   updatecandidate
 
 } = require("../controllers/adminController");
 
@@ -46,6 +48,10 @@ router.get("/result", resultPage);
 router.get("/viewcandidate",viewcandidate);
 
 router.post("/delete/:id", deletecandidate);
+
+router.post("/edit/:id",editcandidate);
+
+router.post("/editCandidate/:id",updatecandidate)
  
 
 module.exports = router;
