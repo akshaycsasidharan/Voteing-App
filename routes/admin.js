@@ -28,14 +28,13 @@ const {
 
 } = require("../controllers/adminController");
 
-
-router.get("/viewUser", viewUserspage);
-
 router.get('/',loginpage);
 
 router.post("/login",adminlogin);
 
-  router.post("/block/:id",block);
+router.get("/viewUser", viewUserspage);
+
+router.post("/block/:id",block);
 
  router.post("/unblock/:id",unblock);
 
@@ -43,15 +42,16 @@ router.get("/addCandidates",  addcandidatePage);
 
 router.post("/candidateadd",upload.single('image'),Candidatesadd);
 
-router.get("/result", resultPage);
-
 router.get("/viewcandidate",viewcandidate);
 
 router.post("/delete/:id", deletecandidate);
 
-router.post("/edit/:id",editcandidate);
+router.get("/edit/:id",editcandidate); 
 
 router.post("/editCandidate/:id",updatecandidate)
+
  
+router.get("/result", resultPage);
+
 
 module.exports = router;

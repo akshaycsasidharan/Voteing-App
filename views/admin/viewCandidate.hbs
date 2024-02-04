@@ -31,12 +31,8 @@
                         <a class="nav-link active" aria-current="page" href="/admin/viewUser">Users</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/admin/viewcandidate">viewcandidates</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/admin/addCandidates">AddCandidates</a>
+                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin/viewcandidate">ViewCandidates</a>
                     </li>
 
                     <li class="nav-item">
@@ -47,14 +43,29 @@
                 <a class="nav-link active" style="color: aliceblue;" aria-current="page" href="#">Signout</a>
 
         </div>
+        
     </nav>
+
+    
+    
 </header>
+
+<a href="/admin/addCandidates">
+
+    <button type="button" style="float: right; margin-top: 10px; margin-right: 10px;"
+ class="btn btn-primary btn-lg">Add Candidates</button>
+   
+    </a> 
 
     <section>
 
       <h3 class="heading" style="text-align: center; margin-top: 25px;text-decoration: underline">VIEW CANDIDATES</h3>
 
+
       <div class="container mt-5">
+
+
+
 
         <table class="table table-hover table-dark">
           <thead>
@@ -82,7 +93,7 @@
                 <td>{{this.designation}}</td>
                 <td>
 
-                  <form action="/admin/edit/{{this._id}}" method="post" style="display:inline;">
+                  <form action="/admin/edit/{{this._id}}" method="get" style="display:inline;">
                   
                   <button
                     type="submit"
@@ -119,6 +130,8 @@
 
       </div>
     </section>
+
+        
 
   </body>
 </html>

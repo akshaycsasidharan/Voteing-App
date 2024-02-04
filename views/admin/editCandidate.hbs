@@ -547,12 +547,10 @@ a.btn-goback:hover {
                         <a class="nav-link active" aria-current="page" href="/admin/viewUser">Users</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/admin/viewcandidate">viewcandidates</a>
-                    </li>
+                   
 
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/admin/addCandidates">AddCandidates</a>
+                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin/viewcandidate">ViewCandidates</a>
                     </li>
 
                     <li class="nav-item">
@@ -577,7 +575,9 @@ a.btn-goback:hover {
         </ul>
       </div>
       <div ng-app ng-init="checked = false">
-        <form class="form-signin" action="/admin/editCandidate/{{result._id}}" method="post" enctype="multipart/form-data">
+
+
+        <form class="form-signin" action="/admin/editCandidate/{{result._id}}" method="post" >
           <label for="name"> name</label>
           <input class="form-styling" type="text" name="name" value="{{result.name}}" placeholder="" />
           <label for="designation">Designation</label>
@@ -588,6 +588,7 @@ a.btn-goback:hover {
 
           <button type="submit" class="btn-signup">UPDATE</button>
         </form>
+
       </div> 
     </div> 
   </div> 

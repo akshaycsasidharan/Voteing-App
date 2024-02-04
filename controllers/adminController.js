@@ -3,16 +3,7 @@ const { render, response } = require("../app");
 const adminHelper = require("../helpers/adminHelper");
 
 module.exports = {
-  viewUserspage: (req, res, next) => {
-    adminHelper.getUsersData().then(async (usersdata) => {
-      console.log("userdata", usersdata);
-      res.render("admin/viewUser", {
-        usersdata,
-      });
-    });
-  },
 
-  // -----------------------------------------------------------------------------
 
   loginpage: (req, res, next) => {
     res.render("admin/adminLogin");
@@ -29,20 +20,53 @@ module.exports = {
   },
 
   // ---------------------------------------------------------------------------------------------
-
-  resultPage: (req, res) => {
-    res.render("admin/result");
-  },
-
-  resultPage: (req, res, next) => {
-    adminHelper.getcandidatedata().then(async (canddata) => {
-      res.render("admin/result", {
-        canddata,
+  viewUserspage: (req, res, next) => {
+    adminHelper.getUsersData().then(async (usersdata) => {
+      res.render("admin/viewUser", {
+        usersdata,
       });
     });
   },
 
-  // ------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------
+
+  block: (req, res, next) => {
+    let id = req.params.id;
+
+    adminHelper.blockUser(id).then((result) => {
+      res.redirect("/admin/viewUser");
+    });
+  },
+
+  unblock: (req, res) => {
+    let id = req.params.id;
+
+    adminHelper.unblockUser(id).then((result) => {
+      res.redirect("/admin/viewUser");
+    });
+  },
+
+  // -------------------------------------------------------------------------------------------
+
+  addcandidatePage: (req, res, next) => {
+
+    res.render("admin/addCandidates");
+
+  },
+
+  Candidatesadd: (req, res) => {
+    // console.log("req.file",req.file);
+
+    try {
+      adminHelper.addCandidate(req.body, req.file).then((response) => {
+        res.redirect("/admin/viewcandidate");
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  //----------------------------------------------------------------------------------------------
 
   viewcandidate: (req, res) => {
     adminHelper.viewcandidates().then(async (viewdata) => {
@@ -64,11 +88,9 @@ module.exports = {
   editcandidate: (req, res) => {
 
      let id = req.params.id;
-     console.log("################",id);
 
     adminHelper.editcandidate(id).then((result) => {
 
-      console.log("%^^^^^^^^^^^",result);
 
      res.render("admin/editCandidate",{result})
 
@@ -79,52 +101,34 @@ module.exports = {
 
   updatecandidate : (req,res) => {
 
-    let id = req.params.id;
+      console.log("req.body@@@@@@",req.body);
+
+     let id = req.params.id;
 
     console.log("***********",id);
+    console.log("req,#########",req.body);
 
-    adminHelper.candupdate(id,req.body).then((result) => {
-      console.log("########3",result);
+    adminHelper.candupdate(id,req.body).then(() => {
       
       res.redirect("/admin/viewcandidate")
     })
+  
   },
 
 // ----------------------------------------------------------------------------------------------
 
-  block: (req, res, next) => {
-    let id = req.params.id;
-
-    adminHelper.blockUser(id).then((result) => {
-      res.redirect("/admin/viewUser");
-    });
+  resultPage: (req, res) => {
+    res.render("admin/result");
   },
 
-  unblock: (req, res) => {
-    let id = req.params.id;
-
-    adminHelper.unblockUser(id).then((result) => {
-      res.redirect("/admin/viewUser");
-    });
-  },
-
-  // -------------------------------------------------------------------------------------------
-
-  addcandidatePage: (req, res, next) => {
-    res.render("admin/addCandidates");
-  },
-
-  Candidatesadd: (req, res) => {
-    // console.log("req.file",req.file);
-
-    try {
-      adminHelper.addCandidate(req.body, req.file).then((response) => {
-        res.redirect("/admin/result");
+  resultPage: (req, res, next) => {
+    adminHelper.getcandidatedata().then(async (canddata) => {
+      res.render("admin/result", {
+        canddata,
       });
-    } catch (error) {
-      console.log(error);
-    }
+    });
   },
 
-  //----------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------
+
 };
