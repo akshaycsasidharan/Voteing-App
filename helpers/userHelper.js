@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const { ObjectId } = require("mongodb");
 
 module.exports = {
+
   doSignup: (userData) => {
     return new Promise(async (resolve, reject) => {
       console.log(userData);
@@ -13,7 +14,7 @@ module.exports = {
       if (userData.password === userData.confirmpassword) {
         // console.log(" @##$@#$%&*^^%$##$%^^&&&%E#@successed");
         var encryptedpassword = await bcrypt.hash(userData.password, 10);
-        // console.log(encryptedpassword);
+         console.log(encryptedpassword);
       } else {
         console.log("error");
         throw new Error("given passwords are not same");
@@ -46,8 +47,7 @@ module.exports = {
 
   doLogin: (loginData) => {
     return new Promise(async (resolve, reject) => {
-      // console.log("logindata", loginData);
-      // console.log("hekjcdnckjsdnj", loginData.password, loginData.email);
+     
       let loginstatus = false;
       let response = {};
       const db = await connectToMongoDB();
@@ -55,7 +55,6 @@ module.exports = {
         .collection(collection.USER_COLLECTION)
         .findOne({ email: loginData.email });
 
-      // console.log("hello", user);
       if (user) {
         bcrypt.compare(loginData.password, user.password).then((status) => {
           // console.log(status);
@@ -65,7 +64,6 @@ module.exports = {
             response.status = true;
             resolve(response);
           } else {
-            // console.log("login failed");
             resolve({ status: false });
           }
         });

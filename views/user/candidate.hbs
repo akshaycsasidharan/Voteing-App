@@ -51,6 +51,7 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
+
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
@@ -61,12 +62,42 @@
                 >Candidates</a>
               </li>
             </ul>
-            <a
-              class="nav-link active"
-              style="color: aliceblue;"
-              aria-current="page"
-              href="#"
-            >Signout</a>
+
+            <div class="dropdown">
+              <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                {{#if user}}
+
+                  {{user.name}}
+
+                {{else}}
+
+                  Account
+
+                {{/if}}
+              </button>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                {{#if user}}
+
+                  <a class="dropdown-item" href="/">Signout</a>
+
+                {{else}}
+
+                  <a class="dropdown-item" href="/">Sign in</a>
+
+                {{/if}}
+
+              </div>
+
+            </div>
           </div>
         </div>
       </nav>
@@ -98,26 +129,34 @@
                 <th scope="row">1</th>
                 <td>
 
-                <img style="width: 50px; height:50px" src="/images/sign-images/{{this.Image}}" alt="">
+                  <img
+                    style="width: 50px; height:50px"
+                    src="/images/sign-images/{{this.Image}}"
+                    alt=""
+                  />
 
                 </td>
                 <td>{{this.name}}</td>
                 <td>
 
-                  <form action="/vote/{{this._id}}" method="post" style="display:inline;">
-                  {{!-- <input type="hidden" name="_method" value="POST">
-                  <input type="hidden" name="userId" value="{{this.name}}"> --}}
-                  {{!-- <input type="hidden" name="userName" value="{{this.designation}}"> --}}
-
-                  <button
-                    type="submit"
-                    class="btn btn-success"
-                    data-toggle="modal"
-                    data-target="#exampleModalCenter"
+                  <form
+                    action="/vote/{{this._id}}"
+                    method="post"
+                    style="display:inline;"
                   >
-                    vote
-                  </button>
-                </form>
+                    {{!-- <input type="hidden" name="_method" value="POST">
+                  <input type="hidden" name="userId" value="{{this.name}}"> --}}
+                    {{!-- <input type="hidden" name="userName" value="{{this.designation}}"> --}}
+
+                    <button
+                      type="submit"
+                      class="btn btn-success"
+                      data-toggle="modal"
+                      data-target="#exampleModalCenter"
+                    >
+                      vote
+                    </button>
+                  </form>
 
                 </td>
               </tr>

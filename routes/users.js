@@ -27,5 +27,9 @@ router.get("/candidate",candidatepage);
 
 router.post("/vote/:id",vote);
 
+router.get('/signout',(req,res)=>{
+  res.session.destroy()
+  res.redirect("user/userLogin")
+})
 
 module.exports = router;

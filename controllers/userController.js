@@ -28,11 +28,20 @@ module.exports = {
 
   login: (req, res, next) => {
     
+    
+
     try {
-      userHelper.doLogin(req.body).then((response) => {
+      userHelper. doLogin(req.body).then((response) => {
+        console.log("@@@@@@@@@@@@@@@@",response);
         if (response.status) {
           req.session.loggedIn = true;
           req.session.user = response.user;
+    //       if(req.session.loggedIn){
+    //   res.redirect("/candidate");
+    // }else{
+    //   res.render("/");
+    // }
+
           res.redirect("/candidate");
         } else {
           res.redirect("/");
@@ -46,9 +55,13 @@ module.exports = {
 // -------------------------------------------------------------------------------------------------------------
 
   candidatepage: (req, res) => {
+    let user = req.session.user
+
+    console.log("~~~~~~~~~~~~~~~",user);
+
     userHelper.showcandidates().then(async (showcand) => {
       res.render("user/candidate", {
-        showcand,
+        showcand,user
       });
     });
   },

@@ -20,6 +20,7 @@ module.exports = {
   },
 
   // ---------------------------------------------------------------------------------------------
+  
   viewUserspage: (req, res, next) => {
     adminHelper.getUsersData().then(async (usersdata) => {
       res.render("admin/viewUser", {
