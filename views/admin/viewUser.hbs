@@ -45,10 +45,43 @@
                 <a class="nav-link active" style="color: aliceblue;" aria-current="page" href="#">Signout</a>
 
         </div>
+
+        <div class="dropdown">
+              <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                {{#if user}}
+
+                  {{user.Email}}
+
+                {{else}}
+
+                  Account
+
+                {{/if}}
+              </button>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                {{#if user}}
+
+                  <a class="dropdown-item" href="/">Signout</a>
+
+                {{else}}
+
+                  <a class="dropdown-item" href="admin/adminLogin">Sign in</a>
+
+                {{/if}}
     </nav>
 </header>
 
 <section>
+  
 
   <h3 class="heading" style="text-align: center;margin-top: 25px; text-decoration: underline">USERS</h3>
 

@@ -50,8 +50,12 @@ router.get("/edit/:id",editcandidate);
 
 router.post("/editCandidate/:id",updatecandidate)
 
- 
 router.get("/result", resultPage);
+
+router.get('/signout',(req,res)=>{
+  res.session.destroy()
+  res.redirect("admin/adminLogin")
+})
 
 
 module.exports = router;

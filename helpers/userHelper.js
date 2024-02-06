@@ -6,7 +6,6 @@ const bcrypt = require("bcrypt");
 const { ObjectId } = require("mongodb");
 
 module.exports = {
-
   doSignup: (userData) => {
     return new Promise(async (resolve, reject) => {
       console.log(userData);
@@ -14,7 +13,7 @@ module.exports = {
       if (userData.password === userData.confirmpassword) {
         // console.log(" @##$@#$%&*^^%$##$%^^&&&%E#@successed");
         var encryptedpassword = await bcrypt.hash(userData.password, 10);
-         console.log(encryptedpassword);
+        console.log(encryptedpassword);
       } else {
         console.log("error");
         throw new Error("given passwords are not same");
@@ -47,7 +46,6 @@ module.exports = {
 
   doLogin: (loginData) => {
     return new Promise(async (resolve, reject) => {
-     
       let loginstatus = false;
       let response = {};
       const db = await connectToMongoDB();
@@ -91,7 +89,7 @@ module.exports = {
 
   // ----------------------------------------------------------
 
-  dovote: (canddataid) => {
+  dovote: (canddataid,userid) => {
     return new Promise(async (resolve, reject) => {
       let id = canddataid;
 
@@ -103,6 +101,14 @@ module.exports = {
           { _id: new ObjectId(canddataid) },
           { $inc: { voteCount: 1 } }
         )
+
+        await db
+        .collection(collection.USER_COLLECTION)
+        .updateOne(
+          { _id: new ObjectId(userid) },
+          { $set: { vote: true } }
+        )
+
         .then((result) => {
           if (result.matchedCount > 0) {
             resolve();
@@ -115,5 +121,8 @@ module.exports = {
         });
     });
   },
+
+
+
 
 };

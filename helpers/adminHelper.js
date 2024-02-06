@@ -15,7 +15,7 @@ module.exports = {
         admindata.email == adminEmail &&
         admindata.password == adminPassword
       ) {
-        resolve();
+        resolve(response);
       }
     });
   },
@@ -126,6 +126,7 @@ module.exports = {
       let getcandidate = await db
         .collection(collection.CANDIDATE_COLLECTION)
         .find({})
+        .sort({ voteCount: -1 })
         .toArray();
       resolve(getcandidate);
     });

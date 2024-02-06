@@ -11,7 +11,12 @@ module.exports = {
 
   adminlogin: (req, res, next) => {
     try {
-      adminHelper.doAdminLogin(req.body).then(() => {
+      adminHelper.doAdminLogin(req.body).then((response) => {
+        
+        if (response) {
+          req.session.loggedIn = true;
+          req.session.user = response.user;
+        }
         res.redirect("/admin/viewUser");
       });
     } catch (error) {
@@ -22,9 +27,13 @@ module.exports = {
   // ---------------------------------------------------------------------------------------------
   
   viewUserspage: (req, res, next) => {
+    let user = req.session.user
+    console.log("userrrrrrrrrrrrr",user);
+
+
     adminHelper.getUsersData().then(async (usersdata) => {
       res.render("admin/viewUser", {
-        usersdata,
+        usersdata,user
       });
     });
   },

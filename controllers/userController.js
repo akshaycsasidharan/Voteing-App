@@ -28,11 +28,9 @@ module.exports = {
 
   login: (req, res, next) => {
     
-    
-
     try {
       userHelper. doLogin(req.body).then((response) => {
-        console.log("@@@@@@@@@@@@@@@@",response);
+        // console.log("@@@@@@@@@@@@@@@@",response);
         if (response.status) {
           req.session.loggedIn = true;
           req.session.user = response.user;
@@ -55,9 +53,8 @@ module.exports = {
 // -------------------------------------------------------------------------------------------------------------
 
   candidatepage: (req, res) => {
-    let user = req.session.user
 
-    console.log("~~~~~~~~~~~~~~~",user);
+    let user = req.session.user
 
     userHelper.showcandidates().then(async (showcand) => {
       res.render("user/candidate", {
@@ -71,17 +68,15 @@ module.exports = {
 
   vote: (req,res,next) => {
 
-    console.log("hello dears",req.body);
+    let userId = req.session.user._id;
 
     let id = req.params.id;
 
-    
-      userHelper.dovote(id).then((result) => {
+      userHelper.dovote(id,userId).then((result) => {
 
         res.redirect("/candidate")
 
       });
-
   },
 
 };
