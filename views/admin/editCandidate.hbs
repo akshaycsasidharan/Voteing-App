@@ -543,6 +543,10 @@ a.btn-goback:hover {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
+                  <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin/dashboard">Dashboard</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/admin/viewUser">Users</a>
                     </li>
@@ -580,11 +584,8 @@ a.btn-goback:hover {
         <form class="form-signin" action="/admin/editCandidate/{{result._id}}" method="post" >
           <label for="name"> name</label>
           <input class="form-styling" type="text" name="name" value="{{result.name}}" placeholder="" />
-          <label for="designation">Designation</label>
-          <input class="form-styling" type="text" name="designation" value="{{result.designation}}" placeholder="" />
-
-           {{!-- <label for="id_image">Symbol</label>
-          <input type="file"  accept="image/*" name="image" class="form-control"> --}}
+           <label for="id_image">Symbol</label>
+          <input type="file"  accept="image/*" name="image" class="form-control">
 
           <button type="submit" class="btn-signup">UPDATE</button>
         </form>

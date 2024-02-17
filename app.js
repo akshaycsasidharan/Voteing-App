@@ -5,13 +5,14 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var hbs = require("express-handlebars");
 let Hbs = require("handlebars");
-var session = require("express-session");
 // var fileupload = require("express-fileupload");
 
 var usersRouter = require("./routes/users");
 var adminRouter = require("./routes/admin");
 
 var app = express();
+
+var session = require("express-session");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

@@ -11,7 +11,6 @@ module.exports = {
       console.log(userData);
 
       if (userData.password === userData.confirmpassword) {
-        // console.log(" @##$@#$%&*^^%$##$%^^&&&%E#@successed");
         var encryptedpassword = await bcrypt.hash(userData.password, 10);
         console.log(encryptedpassword);
       } else {
@@ -26,9 +25,9 @@ module.exports = {
         image: userData.imageURL,
         blocked: false,
         vote: false,
+        usercount:0,
       };
 
-      // console.log(signupData);
 
       const db = await connectToMongoDB();
 
@@ -36,7 +35,6 @@ module.exports = {
         .collection(collection.USER_COLLECTION)
         .insertOne(signupData)
         .then((data) => {
-          // console.log(data);
           resolve(data.insertedId);
         });
     });
@@ -55,7 +53,6 @@ module.exports = {
 
       if (user) {
         bcrypt.compare(loginData.password, user.password).then((status) => {
-          // console.log(status);
           if (status) {
             console.log("login success");
             response.user = user;
@@ -66,7 +63,6 @@ module.exports = {
           }
         });
       } else {
-        // console.log("email does not exist");
         resolve({ status: false });
       }
     });
@@ -75,7 +71,6 @@ module.exports = {
   // ------------------------------------------------------------------------------------------------------
 
   showcandidates: () => {
-    // console.log("candidate result");
 
     return new Promise(async (resolve, reject) => {
       const db = await connectToMongoDB();
@@ -89,7 +84,7 @@ module.exports = {
 
   // ----------------------------------------------------------
 
-  dovote: (canddataid,userid) => {
+  dovote: (canddataid, userid) => {
     return new Promise(async (resolve, reject) => {
       let id = canddataid;
 
@@ -100,14 +95,11 @@ module.exports = {
         .updateOne(
           { _id: new ObjectId(canddataid) },
           { $inc: { voteCount: 1 } }
-        )
+        );
 
-        await db
+      await db
         .collection(collection.USER_COLLECTION)
-        .updateOne(
-          { _id: new ObjectId(userid) },
-          { $set: { vote: true } }
-        )
+        .updateOne({ _id: new ObjectId(userid) }, { $set: { vote: true } })
 
         .then((result) => {
           if (result.matchedCount > 0) {
@@ -122,7 +114,5 @@ module.exports = {
     });
   },
 
-
-
-
+  
 };

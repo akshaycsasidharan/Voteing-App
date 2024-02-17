@@ -110,6 +110,8 @@
         style="text-align: center; margin-top: 25px;text-decoration: underline"
       >CANDIDATES</h3>
 
+     
+
       <div class="container mt-5">
 
         <table class="table table-hover table-dark">
@@ -122,8 +124,11 @@
             </tr>
           </thead>
           <tbody>
+            {{!-- <p>{{user.name}} voted</p> --}}
+
 
             {{#each showcand}}
+            {{!-- <p>{{../user.name}} voted</p> --}}
 
               <tr>
                 <th scope="row">1</th>
@@ -139,18 +144,18 @@
                 <td>{{this.name}}</td>
                 <td>
 
+
+                {{#if ../user.vote }}
+
+                <p>successfully voted</p>
+
+                    {{else}}
                   <form
                     action="/vote/{{this._id}}"
                     method="post"
                     style="display:inline;"
                   >
-                    {{!-- <input type="hidden" name="_method" value="POST">
-                  <input type="hidden" name="userId" value="{{this.name}}"> --}}
-                    {{!-- <input type="hidden" name="userName" value="{{this.designation}}"> --}}
-
-                  {{!-- ----------------- --}}
-
-                    {{# if }}
+                   
 
                     <button
                       type="submit"
@@ -161,11 +166,11 @@
                       vote
                     </button>
                   </form>
-
-                </td>
-              </tr>
+                     {{/if}}
 
             {{/each}}
+             </td>
+              </tr>
 
           </tbody>
         </table>

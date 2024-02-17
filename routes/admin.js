@@ -24,13 +24,16 @@ const {
    viewcandidate,
    deletecandidate,
    editcandidate,
-   updatecandidate
+   updatecandidate,
+    dashboardpage
 
 } = require("../controllers/adminController");
 
 router.get('/',loginpage);
 
 router.post("/login",adminlogin);
+
+router.get("/dashboard",dashboardpage);
 
 router.get("/viewUser", viewUserspage);
 

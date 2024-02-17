@@ -2,7 +2,7 @@ require("dotenv").config();
 var { connectToMongoDB } = require("../config/connection");
 const collection = require("../config/collection");
 const { ObjectId } = require("mongodb");
-const { response } = require("../app");
+// const { response } = require("../app");
 
 module.exports = {
 
@@ -15,7 +15,7 @@ module.exports = {
         admindata.email == adminEmail &&
         admindata.password == adminPassword
       ) {
-        resolve(response);
+        resolve();
       }
     });
   },
@@ -132,7 +132,63 @@ module.exports = {
     });
   },
 
+  dashboarddata: () => {
+    return new Promise(async (resolve, reject) => {
+      const db = await connectToMongoDB();
+  
+      // Use an array for aggregation stages
+      let getcandidate = await db
+        .collection(collection.CANDIDATE_COLLECTION)
+        .aggregate([
+          {
+            $match: { deleted: false },
+          },
+          {
+            $group: {
+              _id: null, // Since you want the total count, use null as the _id
+              votedCount: { $sum: 1 },
+            },
+          },
+        ])
+        .toArray();
+        
+  
+      // Resolve with the count value
+      resolve(getcandidate.length > 0 ? getcandidate[0].votedCount : 0);
+    });
+  },
+  
 
+  // dashboarddata: () => {
+  //   return new Promise(async (resolve, reject) => {
+  //     const db = await connectToMongoDB();
+  
+  //     // Fetch counts from MongoDB
+  //     const totalUsersCount = await db.collection(collection.USER_COLLECTION).aggregate([{$count:"number of users"}]);
+  //     const totalCandidatesCount = await db
+  //           .collection(collection.CANDIDATE_COLLECTION)
+  //           .aggregate([
+  //             {
+  //               $group: {
+  //                 _id: null,
+  //                 votedCount: { $sum: 1 }
+  //               }
+  //             }
+  //           ])
+  //     const votedCount = await db.collection(collection.CANDIDATE_COLLECTION).countDocuments({ vote:true });
+  //     const unvotedCount = totalUsersCount - votedCount;
+  
+  //     // Resolve with the counts
+  //     resolve({
+  //       totalUsersCount,
+  //       totalCandidatesCount,
+  //       votedCount,
+  //       unvotedCount,
+  //     });
+  //   });
+  // },
+  
+  
 
   viewcandidates: () => {
     return new Promise(async (resolve, reject) => {

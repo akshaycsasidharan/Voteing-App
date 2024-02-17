@@ -6,29 +6,55 @@ module.exports = {
 
 
   loginpage: (req, res, next) => {
+    if (req.session.AdminloggedInErr) {
+      res.render("admin/adminLogin", {
+        AdminloggedInErr: req.session.AdminloggedInErr,
+      });
+      return (req.session.AdminloggedInErr = false);
+    }
     res.render("admin/adminLogin");
   },
 
   adminlogin: (req, res, next) => {
-    try {
-      adminHelper.doAdminLogin(req.body).then((response) => {
-        
-        if (response) {
-          req.session.loggedIn = true;
-          req.session.user = response.user;
-        }
-        res.redirect("/admin/viewUser");
-      });
-    } catch (error) {
-      console.log(error);
+    console.log("@@@@@@@222",req.body);
+    
+    if (
+      req.body.email === "admin"
+      &&
+      req.body.password === 1234
+    ) {
+        console.log("$$$$$$$$$$$");
+      console.log(req.session);
+      req.session.Admin = req.body;
+      req.session.Adminloggedin = true;
+      // console.log(req.session);
+      res.redirect("/admin");
+    } else {
+      console.log(req.body);
+      req.session.AdminloggedInErr = "invalid user or password";
+      res.redirect("/admin/dashboard");
     }
+    // try {
+
+      
+    //   adminHelper.doAdminLogin(req.body).then(() => {
+        
+    //     if (response) {
+    //       req.session.adminLoggedIn = true;
+    //       req.session.admin = response.admin;
+    //     }
+    //     res.redirect("/admin/viewUser");
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   },
 
   // ---------------------------------------------------------------------------------------------
   
   viewUserspage: (req, res, next) => {
     let user = req.session.user
-    console.log("userrrrrrrrrrrrr",user);
+    // console.log("userrrrrrrrrrrrr",user);
 
 
     adminHelper.getUsersData().then(async (usersdata) => {
@@ -111,12 +137,12 @@ module.exports = {
 
   updatecandidate : (req,res) => {
 
-      console.log("req.body@@@@@@",req.body);
+      // console.log("req.body@@@@@@",req.body);
 
      let id = req.params.id;
 
-    console.log("***********",id);
-    console.log("req,#########",req.body);
+    // console.log("***********",id);
+    // console.log("req,#########",req.body);
 
     adminHelper.candupdate(id,req.body).then(() => {
       
@@ -139,6 +165,29 @@ module.exports = {
     });
   },
 
+
+
+  dashboardpage :(req,res,next) => {
+    res.render("admin/dashBoard")
+  },
+
+  dashboardpage: (req, res, next) => {
+    adminHelper.dashboarddata().then(async (dashdata) => {
+      console.log("@@@@@@@@@@@@@@@@@dscvdsfvd", dashdata);
+      
+      // Send the dashboard data to the client
+      res.render('admin/dashBoard', { dashdata: dashdata });
+    }).catch((err) => {
+      console.error("Error fetching dashboard data:", err);
+      // Handle the error and send an appropriate response
+      res.status(500).send("Error fetching dashboard data");
+    });
+  }
+  
+  // res.render("admin/dashBoard",{
+      //   dashdata,
+
+      // });
 // ------------------------------------------------------------------------------------
 
 };

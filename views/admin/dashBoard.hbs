@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Frontendfunn - Bootstrap 5 Admin Dashboard Template</title>
+  </head>
+  <body style="background-color:  DarkGray;">
+  
+
+ <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">Admin Panel</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin/dashboard">Dashboard</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin/viewUser">Users</a>
+                    </li>
+
+                    
+                    
+                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin/viewcandidate">ViewCandidates</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin/result">Result</a>
+                    </li>
+            </div>
+        
+                <a class="nav-link active" style="color: aliceblue;" aria-current="page" href="/admin">Signout</a>
+
+        </div>
+
+       
+    </nav>
+</header>
+
+  <h3 class="heading" style="text-align: center;margin-top: 25px; text-decoration: underline">DASHBOARD</h3>
+
+
+    <!-- offcanvas -->
+
+    
+    <main class="mt-5 pt-3">
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <div class="card bg-primary text-white h-100">
+              <div class="card-body py-5">
+                Total Users</div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="card bg-warning text-dark h-100">
+              <div class="card-body py-5">{{#if dashdata}}
+        Total Candidates : {{dashdata}}
+      {{else}}
+        Total Candidates : 0
+      {{/if}}</div>
+              
+            </div>
+          </div>
+          {{!-- {{#if dashdata}} --}}
+          <div class="col-md-3 mb-3">
+  <div class="card bg-success text-white h-100">
+    <div class="card-body py-5">
+      {{#if dashdata}}
+        Voted Users: {{dashdata}}
+      {{else}}
+        Voted Users: 0
+      {{/if}}
+         
+    </div>
+  </div>
+</div>
+
+          {{!-- {{#/if}} --}}
+
+          <div class="col-md-3 mb-3">
+            <div class="card bg-danger text-white h-100">
+              <div class="card-body py-5">Unvoted Users</div>
+
+
+
+           
+    </main>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+    <script src="./js/jquery-3.5.1.js"></script>
+    <script src="./js/jquery.dataTables.min.js"></script>
+    <script src="./js/dataTables.bootstrap5.min.js"></script>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
