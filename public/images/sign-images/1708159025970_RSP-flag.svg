@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   width="600"
+   height="300"
+   id="svg17125"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   sodipodi:docname="RSP-flag.svg"
+   sodipodi:docbase="C:\Documents and Settings\Nicholas\Desktop">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Flag of the Revolutionary Socialist Party</dc:title>
+        <dc:date>2006-06-04</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Nicholas</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:description>Flag of the Revolutionary Socialist Party of India.</dc:description>
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>made from the USSR flag</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Revolutionary Socialist Party</rdf:li>
+            <rdf:li>RSP</rdf:li>
+            <rdf:li>flag</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="540"
+     inkscape:window-width="756"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="1.1083333"
+     inkscape:cx="300"
+     inkscape:cy="150"
+     inkscape:window-x="128"
+     inkscape:window-y="87"
+     inkscape:current-layer="svg17125" />
+  <defs
+     id="defs17134" />
+  <rect
+     width="600"
+     height="300"
+     x="0"
+     y="0"
+     style="fill:#de0000"
+     id="red background" />
+  <path
+     sodipodi:type="arc"
+     style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.53600001;stroke-linecap:round;stroke-miterlimit:1.10000002;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path1309"
+     sodipodi:cx="86.616539"
+     sodipodi:cy="88.872177"
+     sodipodi:rx="67.669174"
+     sodipodi:ry="63.157894"
+     d="M 154.28571 88.872177 A 67.669174 63.157894 0 1 1  18.947365,88.872177 A 67.669174 63.157894 0 1 1  154.28571 88.872177 z"
+     transform="matrix(0.893237,0,0,0.95704,7.292558,-3.583195)" />
+  <g
+     transform="matrix(1.25,0,0,1.25,-40.3383,-23.10347)"
+     id="g9607"
+     style="fill:#de0000;fill-opacity:1">
+    <polygon
+       points="48.9274,74.0974 51.2962,76.4662 53.2044,74.4922 65.6041,86.8927 67.3719,85.216 54.6179,73.1104 57.284,70.7416 53.4018,69.6888 48.9274,74.0974 "
+       transform="matrix(2.94893,0,0,2.968187,-68.67505,-149.5889)"
+       style="fill:#de0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.35280001;stroke-linecap:round;stroke-linejoin:bevel"
+       id="polygon1374" />
+    <path
+       d="M 104.43308,48.324808 C 119.37873,58.3843 126.85913,68.587291 127.51784,78.935059 C 127.11946,101.88425 102.2436,112.54133 85.799979,93.719846 L 85.86853,97.265196 L 82.731045,97.132394 C 80.587586,101.29315 78.332462,105.26441 76.478306,107.67547 C 71.486649,109.15729 69.04874,107.60098 70.342991,101.60538 C 72.9138,98.865554 76.77017,96.988588 79.983591,94.680202 L 80.137072,91.792357 L 84.106073,91.588623 L 84.440411,90.472169 L 86.858691,90.523012 C 103.06707,106.55123 121.36002,89.153261 120.20382,76.456949 C 119.04761,63.760626 114.62424,59.407167 104.43308,48.324808 L 104.43308,48.324808 z "
+       style="fill:#de0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.36186126;stroke-linecap:round;stroke-linejoin:bevel"
+       id="path1376" />
+  </g>
+</svg>

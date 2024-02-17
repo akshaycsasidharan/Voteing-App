@@ -173,9 +173,9 @@ module.exports = {
 
   dashboardpage: (req, res, next) => {
     adminHelper.dashboarddata().then(async (dashdata) => {
-      console.log("@@@@@@@@@@@@@@@@@dscvdsfvd", dashdata);
+      // console.log("@@@@@@@@@@@@@@@@@dscvdsfvd", dashdata);
       
-      // Send the dashboard data to the client
+      // Assuming dashdata is an object with properties like totalCandidatesCount, votedUsersCount, unvotedUsersCount
       res.render('admin/dashBoard', { dashdata: dashdata });
     }).catch((err) => {
       console.error("Error fetching dashboard data:", err);
@@ -184,10 +184,7 @@ module.exports = {
     });
   }
   
-  // res.render("admin/dashBoard",{
-      //   dashdata,
 
-      // });
 // ------------------------------------------------------------------------------------
 
 };

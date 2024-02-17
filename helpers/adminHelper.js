@@ -5,7 +5,6 @@ const { ObjectId } = require("mongodb");
 // const { response } = require("../app");
 
 module.exports = {
-
   doAdminLogin: (admindata) => {
     let adminPassword = process.env.PASSWORD;
     let adminEmail = process.env.EMAIL;
@@ -21,7 +20,7 @@ module.exports = {
   },
 
   // --------------------------------------------------------------------------------------
- 
+
   getUsersData: () => {
     return new Promise(async (resolve, reject) => {
       const db = await connectToMongoDB();
@@ -65,8 +64,6 @@ module.exports = {
         });
     });
   },
-
-
 
   unblockUser: (userid) => {
     return new Promise(async (resolve, reject) => {
@@ -119,7 +116,6 @@ module.exports = {
 
   //----------------------------------------------------------------------------------------
 
-
   getcandidatedata: () => {
     return new Promise(async (resolve, reject) => {
       const db = await connectToMongoDB();
@@ -132,12 +128,13 @@ module.exports = {
     });
   },
 
+  //  -------------------------------------------------------------------------------------------
+
   dashboarddata: () => {
     return new Promise(async (resolve, reject) => {
       const db = await connectToMongoDB();
-  
-      // Use an array for aggregation stages
-      let getcandidate = await db
+
+      const getCandidateResult = await db
         .collection(collection.CANDIDATE_COLLECTION)
         .aggregate([
           {
@@ -145,50 +142,72 @@ module.exports = {
           },
           {
             $group: {
-              _id: null, // Since you want the total count, use null as the _id
+              _id: null,
               votedCount: { $sum: 1 },
             },
           },
         ])
         .toArray();
-        
-  
+
+      const getUserVotedResult = await db
+        .collection(collection.USER_COLLECTION)
+        .aggregate([
+          {
+            $match: { vote: true },
+          },
+          {
+            $group: {
+              _id: null,
+              votedUserCount: { $sum: 1 },
+            },
+          },
+        ])
+        .toArray();
+
+      const getUserUnvotedResult = await db
+        .collection(collection.USER_COLLECTION)
+        .aggregate([
+          {
+            $match: { vote: false },
+          },
+          {
+            $group: {
+              _id: null,
+              unvotedUserCount: { $sum: 1 },
+            },
+          },
+        ])
+        .toArray();
+
+        const getTotalusers = await db
+        .collection(collection.USER_COLLECTION)
+        .aggregate([
+          {
+            $group: {
+              _id: null,
+              totalUsersCount: { $sum: 1 },
+            },
+          },
+        ])
+        .toArray();
+      
       // Resolve with the count value
-      resolve(getcandidate.length > 0 ? getcandidate[0].votedCount : 0);
+      resolve({
+        totalCandidatesCount:
+          getCandidateResult.length > 0 ? getCandidateResult[0].votedCount : 0,
+        votedUsersCount:
+          getUserVotedResult.length > 0 ? getUserVotedResult[0].votedUserCount : 0,
+        unvotedUsersCount:
+          getUserUnvotedResult.length > 0
+            ? getUserUnvotedResult[0].unvotedUserCount
+            : 0,
+        totalUsersCount: getTotalusers.length > 0 ? getTotalusers[0].totalUsersCount : 0,
+      });
+      
     });
   },
-  
 
-  // dashboarddata: () => {
-  //   return new Promise(async (resolve, reject) => {
-  //     const db = await connectToMongoDB();
-  
-  //     // Fetch counts from MongoDB
-  //     const totalUsersCount = await db.collection(collection.USER_COLLECTION).aggregate([{$count:"number of users"}]);
-  //     const totalCandidatesCount = await db
-  //           .collection(collection.CANDIDATE_COLLECTION)
-  //           .aggregate([
-  //             {
-  //               $group: {
-  //                 _id: null,
-  //                 votedCount: { $sum: 1 }
-  //               }
-  //             }
-  //           ])
-  //     const votedCount = await db.collection(collection.CANDIDATE_COLLECTION).countDocuments({ vote:true });
-  //     const unvotedCount = totalUsersCount - votedCount;
-  
-  //     // Resolve with the counts
-  //     resolve({
-  //       totalUsersCount,
-  //       totalCandidatesCount,
-  //       votedCount,
-  //       unvotedCount,
-  //     });
-  //   });
-  // },
-  
-  
+  // ----------------------------------------------------------------------------------------------------------------------------
 
   viewcandidates: () => {
     return new Promise(async (resolve, reject) => {
@@ -202,8 +221,6 @@ module.exports = {
       resolve(viewcandidates);
     });
   },
-
-
 
   deletecand: (deleteid) => {
     return new Promise(async (resolve, reject) => {
@@ -223,8 +240,6 @@ module.exports = {
         });
     });
   },
-
-  
 
   editcandidate: (editid) => {
     return new Promise(async (resolve, reject) => {
@@ -246,7 +261,6 @@ module.exports = {
         });
     });
   },
-  
 
   candupdate: (userid, updatedetails) => {
     return new Promise(async (resolve, reject) => {
@@ -257,19 +271,17 @@ module.exports = {
           { _id: new ObjectId(userid) },
           {
             $set: {
-              name : updatedetails.name,
-              designation : updatedetails.designation
+              name: updatedetails.name,
+              designation: updatedetails.designation,
             },
           }
         )
         .then((response) => {
-          console.log("@@@@@@@@@response########",response);
-          resolve()
-        })
-        
+          console.log("@@@@@@@@@response########", response);
+          resolve();
+        });
     });
   },
 
   // ------------------------------------------------------------------------------------------------------
-
 };

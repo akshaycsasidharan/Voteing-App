@@ -68,38 +68,54 @@
           <div class="col-md-3 mb-3">
             <div class="card bg-primary text-white h-100">
               <div class="card-body py-5">
-                Total Users</div>
+                {{#if dashdata}}
+          Total Users: {{dashdata.totalUsersCount}}    
+              {{else}}
+        Total Users: N/A
+      {{/if}}
             </div>
           </div>
+      </div>
+
           <div class="col-md-3 mb-3">
             <div class="card bg-warning text-dark h-100">
               <div class="card-body py-5">{{#if dashdata}}
-        Total Candidates : {{dashdata}}
-      {{else}}
-        Total Candidates : 0
+          Total Candidates: {{dashdata.totalCandidatesCount}}    
+              {{else}}
+        Total Candidates: N/A
       {{/if}}</div>
               
             </div>
           </div>
+
           {{!-- {{#if dashdata}} --}}
           <div class="col-md-3 mb-3">
   <div class="card bg-success text-white h-100">
     <div class="card-body py-5">
+      <!-- Display the voted count dynamically -->
       {{#if dashdata}}
-        Voted Users: {{dashdata}}
+Voted Users: {{dashdata.votedUsersCount}}
       {{else}}
-        Voted Users: 0
+        Voted Users: N/A
       {{/if}}
-         
     </div>
   </div>
 </div>
 
-          {{!-- {{#/if}} --}}
 
           <div class="col-md-3 mb-3">
             <div class="card bg-danger text-white h-100">
-              <div class="card-body py-5">Unvoted Users</div>
+              <div class="card-body py-5">
+              {{#if dashdata}}
+        Unvoted Users: {{dashdata.unvotedUsersCount}}
+              {{else}}
+        Unvoted Users: N/A
+        {{/if}}
+            </div>
+        </div>
+    </div>
+
+              
 
 
 
