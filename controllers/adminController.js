@@ -15,8 +15,10 @@ module.exports = {
     res.render("admin/adminLogin");
   },
 
+
   adminlogin: (req, res, next) => {
     console.log("@@@@@@@222",req.body);
+
     
     if (
       req.body.email === "admin"

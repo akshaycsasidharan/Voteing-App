@@ -69,34 +69,25 @@
             <div class="card bg-primary text-white h-100">
               <div class="card-body py-5">
                 {{#if dashdata}}
-          Total Users: {{dashdata.totalUsersCount}}    
+                        <p style="font-size: 25px; font-weight: bold;">Total Users <br><span style="font-size: 100px;margin-left :130px;">{{dashdata.unvotedUsersCount}}</span>
+
               {{else}}
-        Total Users: N/A
+                      <p style="font-size: 25px; font-weight: bold;">Total Users<br><span style="font-size: 100px;margin-left :130px;">N/A</span></p>
+
       {{/if}}
             </div>
           </div>
       </div>
 
-          <div class="col-md-3 mb-3">
-            <div class="card bg-warning text-dark h-100">
-              <div class="card-body py-5">{{#if dashdata}}
-          Total Candidates: {{dashdata.totalCandidatesCount}}    
-              {{else}}
-        Total Candidates: N/A
-      {{/if}}</div>
-              
-            </div>
-          </div>
-
-          {{!-- {{#if dashdata}} --}}
-          <div class="col-md-3 mb-3">
-  <div class="card bg-success text-white h-100">
+         <div class="col-md-3 mb-3">
+  <div class="card bg-warning text-dark h-100">
     <div class="card-body py-5">
-      <!-- Display the voted count dynamically -->
       {{#if dashdata}}
-Voted Users: {{dashdata.votedUsersCount}}
+              <p style="font-size: 25px; font-weight: bold;">Unvoted Users <br><span style="font-size: 100px;margin-left :130px;">{{dashdata.totalCandidatesCount}}</span></p>
+
       {{else}}
-        Voted Users: N/A
+              <p style="font-size: 25px; font-weight: bold;">Unvoted Users <br><span style="font-size: 100px;margin-left :130px;">N/A</span></p>
+
       {{/if}}
     </div>
   </div>
@@ -104,22 +95,32 @@ Voted Users: {{dashdata.votedUsersCount}}
 
 
           <div class="col-md-3 mb-3">
-            <div class="card bg-danger text-white h-100">
-              <div class="card-body py-5">
-              {{#if dashdata}}
-        Unvoted Users: {{dashdata.unvotedUsersCount}}
-              {{else}}
-        Unvoted Users: N/A
-        {{/if}}
-            </div>
-        </div>
+  <div class="card bg-success text-white h-100">
+    <div class="card-body py-5">
+      {{#if dashdata}}
+              <p style="font-size: 25px; font-weight: bold;">Voted Users <br><span style="font-size: 100px;margin-left :130px;">{{dashdata.votedUsersCount}}</span></p>
+      {{else}}
+              <p style="font-size: 25px; font-weight: bold;">Voted Users<br><span style="font-size: 100px;margin-left :130px;">N/A</span></p>
+      {{/if}}
     </div>
+  </div>
+</div>
+
+
+          <div class="col-md-3 mb-3">
+  <div class="card bg-danger text-white h-100">
+    <div class="card-body py-5">
+      {{#if dashdata}}
+        <p style="font-size: 25px; font-weight: bold;">Unvoted Users <br><span style="font-size: 100px;margin-left :130px;">{{dashdata.unvotedUsersCount}}</span></p>
+      {{else}}
+              <p style="font-size: 25px; font-weight: bold;">Unvoted Users <br><span style="font-size: 100px;margin-left :130px;">N/A</span></p>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
 
               
-
-
-
-           
     </main>
     <script src="./js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>

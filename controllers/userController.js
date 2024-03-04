@@ -28,17 +28,11 @@ module.exports = {
   login: (req, res, next) => {
     try {
       userHelper.doLogin(req.body).then((response) => {
-        if (response.status) {
-          req.session.loggedIn = true;
-          req.session.user = response.user;
-          console.log("##########",req.session.loggedIn);
-          //       if(req.session.loggedIn){
-          //   res.redirect("/candidate");
-          // }else{
-          //   res.render("/");
-          // }
+        console.log("response",response);
+        if (response.status &&  !response.user.blocked) {
+          res.render("user/candidate")
 
-          res.redirect("/candidate");
+          // res.redirect("/candidate");
         } else {
           res.redirect("/");
         }
@@ -54,7 +48,7 @@ module.exports = {
 
     console.log("$$$$$$$$$$$candidatepage");
     let user = req.session.user;
-    console.log("loggedin################$$$$$",req.session.loggedIn);
+    // console.log("loggedin################$$$$$",req.session.loggedIn);
     if(req.session.loggedIn){
       userHelper.showcandidates().then( (showcand) => {
         console.log("###########",req.session);

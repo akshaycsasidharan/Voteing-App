@@ -121,7 +121,7 @@ module.exports = {
       const db = await connectToMongoDB();
       let getcandidate = await db
         .collection(collection.CANDIDATE_COLLECTION)
-        .find({})
+        .find({deleted : false})
         .sort({ voteCount: -1 })
         .toArray();
       resolve(getcandidate);
